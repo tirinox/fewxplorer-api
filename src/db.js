@@ -1,7 +1,7 @@
 const fs = require('fs').promises
 
 
-const DATA_PATH = process.env.DATA_PATH || '../data/var'
+const DATA_PATH = process.env.DATA_PATH || './data/var'
 
 const PRICE_PATH = DATA_PATH + '/' + 'prices.json'
 
@@ -24,7 +24,7 @@ class DB {
             const now = nowTS()
             let newKeys = 0
             for(let key of Object.keys(newItems)) {
-                newKeys[key].lastUpdateTS = now
+                newItems[key].lastUpdateTS = now
                 ++newKeys
             }
 

@@ -26,11 +26,11 @@ async function getTokensOpenSea(ids) {
         const tokenId = order.asset.token_id
         const price = convertEthToFloat(order.current_price)
         const owner = order.asset.owner
-        results[tokenId] = {
+        results[tokenId.toString()] = {
             tokenId,
             price,
             ownerAddress: owner.address,
-            ownerName: owner.user.username,
+            ownerName: (owner.user !== null ? owner.user.username : ''),
             buyNow: (order.side === 1)
         }
     }
