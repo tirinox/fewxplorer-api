@@ -30,14 +30,14 @@ class DB {
 
             const now = nowTS()
             this.lastSuccessTS = now
-            let newKeys = 0
+            let nNewKeys = 0
             for(let key of Object.keys(newItems)) {
                 newItems[key].lastUpdateTS = now
-                ++newKeys
+                ++nNewKeys
             }
 
-            console.log(`saveNewPrices: newItems ${Object.keys(newItems).length}`)
-            for(let [k, v] of Object.entries(newKeys)) {
+            console.log(`saveNewPrices: newItems ${nNewKeys}`)
+            for(const [k, v] of Object.entries(newItems)) {
                 this.priceDB[k] = v
             }
 

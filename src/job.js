@@ -43,7 +43,7 @@ class OpenSeaJob {
                 const batchIds = this.allTokenIds.slice(this._currentIndex, this._currentIndex + this.batchSize)
 
                 const tokenInfo = await getTokensOpenSea(batchIds)
-                
+
                 await this.db.saveNewPrices(tokenInfo)
             } catch (e) {
                 console.error(`job tick failed: ${e}!`)
