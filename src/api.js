@@ -2,6 +2,7 @@ const Koa = require('koa')
 const KoaLogger = require('koa-logger')
 const KoaRouter = require('koa-router')
 const {readTotalSupply} = require("./smartcontract");
+const {getTokensOpenSea} = require("./opensea");
 
 const prefix = process.env.API_PREFIX || '/fewpi'
 console.log(`API prefix: ${prefix}`)
@@ -16,6 +17,13 @@ router
     .get('/contract/total_supply', async (ctx, next) => {
         ctx.body = {
             total_supply: (await readTotalSupply())
+        }
+    })
+    .get('/opensea/tokens/:ids', async (ctx, next) => {
+        const ids = ctx.params.ids.split(',').map(s => s.trim()).filter(e => e)
+        const results = await getTokensOpenSea(ids)
+        ctx.body = {
+            tokens: results
         }
     })
 

@@ -10,8 +10,9 @@ async function getTokensOpenSea(ids) {
             'Content-Type': 'application/json',
         }
     })
-    console.log(data.data)
-    return BigInt(data.current_price)
+    // console.log(data.data)
+    // return BigInt(data.current_price)
+    return data.data
 }
 
 module.exports = {
