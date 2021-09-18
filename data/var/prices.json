@@ -1,1 +1,338 @@
-{"0":{"tokenId":"0","price":0.1,"ownerAddress":"0xec0297f0a72286c92e826e3b55bd61ad31986dfe","ownerName":"DTSnft","buyNow":false,"lastUpdateTS":1631977887},"1":{"tokenId":"1","price":1000,"ownerAddress":"0x3471884f189fd7c63fe8c83601d28ce0cc1b3853","ownerName":"leoilman","buyNow":true,"lastUpdateTS":1631977887},"3":{"tokenId":"3","price":1003,"ownerAddress":"0x7a237a323cd979b57ffd26b0bee913f8dbf9dc31","ownerName":null,"buyNow":true,"lastUpdateTS":1631977887},"5":{"tokenId":"5","price":8888,"ownerAddress":"0x37b3fae959f171767e34e33eaf7ee6e7be2842c3","ownerName":"COBRAlite","buyNow":true,"lastUpdateTS":1631977887},"7":{"tokenId":"7","price":0.1,"ownerAddress":"0x4d9d3e18ed6f62018a84d654201938b78689399a","ownerName":null,"buyNow":false,"lastUpdateTS":1631977887},"8":{"tokenId":"8","price":0.1,"ownerAddress":"0x4d9d3e18ed6f62018a84d654201938b78689399a","ownerName":null,"buyNow":false,"lastUpdateTS":1631977887},"9":{"tokenId":"9","price":0.1,"ownerAddress":"0x4d9d3e18ed6f62018a84d654201938b78689399a","ownerName":null,"buyNow":false,"lastUpdateTS":1631977887},"14":{"tokenId":"14","price":0.065,"ownerAddress":"0x4d9d3e18ed6f62018a84d654201938b78689399a","ownerName":null,"buyNow":false,"lastUpdateTS":1631977887},"15":{"tokenId":"15","price":0.1,"ownerAddress":"0x4d9d3e18ed6f62018a84d654201938b78689399a","ownerName":null,"buyNow":false,"lastUpdateTS":1631977887},"22":{"tokenId":"22","price":0.07,"ownerAddress":"0x01296c73e761e565074b7d5fb296fd4c3e1ba924","ownerName":"onetonine","buyNow":true,"lastUpdateTS":1631977887},"23":{"tokenId":"23","price":0.12,"ownerAddress":"0x01296c73e761e565074b7d5fb296fd4c3e1ba924","ownerName":"onetonine","buyNow":true,"lastUpdateTS":1631977887},"24":{"tokenId":"24","price":0.12,"ownerAddress":"0x01296c73e761e565074b7d5fb296fd4c3e1ba924","ownerName":"onetonine","buyNow":true,"lastUpdateTS":1631977887},"26":{"tokenId":"26","price":0.12,"ownerAddress":"0x01296c73e761e565074b7d5fb296fd4c3e1ba924","ownerName":"onetonine","buyNow":true,"lastUpdateTS":1631977887},"27":{"tokenId":"27","price":0.12,"ownerAddress":"0x01296c73e761e565074b7d5fb296fd4c3e1ba924","ownerName":"onetonine","buyNow":true,"lastUpdateTS":1631977887},"30":{"tokenId":"30","price":0.12,"ownerAddress":"0x01296c73e761e565074b7d5fb296fd4c3e1ba924","ownerName":"onetonine","buyNow":true,"lastUpdateTS":1631977889},"31":{"tokenId":"31","price":0.49,"ownerAddress":"0x5e4038eb6f1e7316a45ed569e94c8cd1706a5ec5","ownerName":"ali","buyNow":true,"lastUpdateTS":1631977889},"33":{"tokenId":"33","price":0.12,"ownerAddress":"0x01296c73e761e565074b7d5fb296fd4c3e1ba924","ownerName":"onetonine","buyNow":true,"lastUpdateTS":1631977889},"37":{"tokenId":"37","price":0.07,"ownerAddress":"0x01296c73e761e565074b7d5fb296fd4c3e1ba924","ownerName":"onetonine","buyNow":true,"lastUpdateTS":1631977889},"38":{"tokenId":"38","price":0.12,"ownerAddress":"0x01296c73e761e565074b7d5fb296fd4c3e1ba924","ownerName":"onetonine","buyNow":true,"lastUpdateTS":1631977889},"41":{"tokenId":"41","price":0.07,"ownerAddress":"0x01296c73e761e565074b7d5fb296fd4c3e1ba924","ownerName":"onetonine","buyNow":true,"lastUpdateTS":1631977889},"44":{"tokenId":"44","price":1,"ownerAddress":"0xb47f6f295af0646177f46f19656177eb462c1867","ownerName":null,"buyNow":true,"lastUpdateTS":1631977889},"49":{"tokenId":"49","price":0.12,"ownerAddress":"0x01296c73e761e565074b7d5fb296fd4c3e1ba924","ownerName":"onetonine","buyNow":true,"lastUpdateTS":1631977889},"58":{"tokenId":"58","price":0.07,"ownerAddress":"0x01296c73e761e565074b7d5fb296fd4c3e1ba924","ownerName":"onetonine","buyNow":true,"lastUpdateTS":1631977889},"62":{"tokenId":"62","price":0.04,"ownerAddress":"0xa53a04acf0ab015c2cf14174c63c842ca90b5f06","ownerName":"SoLegendary","buyNow":false,"lastUpdateTS":1631977891},"66":{"tokenId":"66","price":0.248,"ownerAddress":"0x4cf8be01027ad66c4939181a5b8c5b2b281771f0","ownerName":"AKIMA","buyNow":true,"lastUpdateTS":1631977891},"69":{"tokenId":"69","price":6.9,"ownerAddress":"0x5ac5e9da579d9284cff21772de7dd34ea71f5c3b","ownerName":null,"buyNow":true,"lastUpdateTS":1631977891},"85":{"tokenId":"85","price":0.05,"ownerAddress":"0x63a64ecf0a751288e54aee7356842e448ea9485c","ownerName":"j4ffa","buyNow":true,"lastUpdateTS":1631977891},"88":{"tokenId":"88","price":88,"ownerAddress":"0x0c6306c1ff8f0ca8432b761085d5ce74160a499a","ownerName":"jpeg_kollector","buyNow":true,"lastUpdateTS":1631977891},"95":{"tokenId":"95","price":0.49,"ownerAddress":"0x5ac5e9da579d9284cff21772de7dd34ea71f5c3b","ownerName":null,"buyNow":true,"lastUpdateTS":1631977895},"97":{"tokenId":"97","price":0.977,"ownerAddress":"0x862f01e6b2711677c12fe4cc4f3863ffb2e735cb","ownerName":null,"buyNow":true,"lastUpdateTS":1631977895},"113":{"tokenId":"113","price":0.41,"ownerAddress":"0xe969bf18fbc0ed94fbeb0821d347d0525a2c880a","ownerName":"EthNFTguy","buyNow":true,"lastUpdateTS":1631977895},"124":{"tokenId":"124","price":0.085,"ownerAddress":"0xbf042d59f8230e40e8569bbc221de7b2578d0a22","ownerName":"FluffyShrine","buyNow":true,"lastUpdateTS":1631977897},"134":{"tokenId":"134","price":0.2,"ownerAddress":"0xd87819df2c7fcec834c62202b28300ae460a1b17","ownerName":"ddthvn","buyNow":true,"lastUpdateTS":1631977897},"138":{"tokenId":"138","price":0.18,"ownerAddress":"0xb581ba86bee1efa3d9dec30dafc8e87253458476","ownerName":null,"buyNow":true,"lastUpdateTS":1631977897},"150":{"tokenId":"150","price":0.15,"ownerAddress":"0x03db74df4ef8b29fe210abcf027c757747c14f00","ownerName":"gotoheaven","buyNow":true,"lastUpdateTS":1631977899},"156":{"tokenId":"156","price":0.05,"ownerAddress":"0x77acc06250552c8a96e9560670328974386d632f","ownerName":null,"buyNow":false,"lastUpdateTS":1631977899},"165":{"tokenId":"165","price":0.07,"ownerAddress":"0xb1776c152080228214c2e84e39a93311ff3c03c1","ownerName":"eeeeeeeeee44444444444444","buyNow":false,"lastUpdateTS":1631977899},"169":{"tokenId":"169","price":0.025,"ownerAddress":"0x3624c808b025fa95402b13860de4d43b39999bbd","ownerName":"Zilj","buyNow":false,"lastUpdateTS":1631977899},"177":{"tokenId":"177","price":0.1,"ownerAddress":"0x5a45fa1d4ffc1428dc50f9df6fd1643f1012a39d","ownerName":null,"buyNow":true,"lastUpdateTS":1631977899},"180":{"tokenId":"180","price":2,"ownerAddress":"0xb70ea99cd14f39328534415e1c06c03d71598c70","ownerName":"","buyNow":true,"lastUpdateTS":1631977902},"181":{"tokenId":"181","price":0.3,"ownerAddress":"0x4d5149a1f7f7277afd1bd2936db70c5fbcbecf2e","ownerName":"One_Man_Master","buyNow":true,"lastUpdateTS":1631977902},"183":{"tokenId":"183","price":0.4,"ownerAddress":"0x18537f0ea71aff6e2f15a79e672822943ebb2d3f","ownerName":"","buyNow":true,"lastUpdateTS":1631977902},"210":{"tokenId":"210","price":0.7,"ownerAddress":"0xb19343cafadd9f798da8467b5f9ab77378645685","ownerName":null,"buyNow":true,"lastUpdateTS":1631977904},"222":{"tokenId":"222","price":0.2,"ownerAddress":"0x37660b87525559598c053f0f5b4c93c44ec35e13","ownerName":"onebig","buyNow":true,"lastUpdateTS":1631977904},"229":{"tokenId":"229","price":0.03,"ownerAddress":"0x90ebe356a823e31242c394e4331419ce9d474c63","ownerName":"","buyNow":false,"lastUpdateTS":1631977904},"231":{"tokenId":"231","price":0.9,"ownerAddress":"0x1576ac97bf34a76b34e6eec495a0253d6ab70d21","ownerName":null,"buyNow":true,"lastUpdateTS":1631977904},"235":{"tokenId":"235","price":0.1,"ownerAddress":"0x2488f090656bddb63fe3bdb506d0d109aaad93bb","ownerName":"VZhurko","buyNow":true,"lastUpdateTS":1631977904},"240":{"tokenId":"240","price":0.2,"ownerAddress":"0x6ed611581f047be8188c9eb085df6022265885ec","ownerName":"The_Shifty_150","buyNow":true,"lastUpdateTS":1631977906},"243":{"tokenId":"243","price":1.5,"ownerAddress":"0x62c0e99b6e55680fd234818e4c1f17bba11f85c5","ownerName":"slokerw","buyNow":true,"lastUpdateTS":1631977906},"248":{"tokenId":"248","price":0.12,"ownerAddress":"0x5dc4561125fcac2030d07301c50153cfe624391b","ownerName":"0x2jsa8525072hot4u6930lhjb12420","buyNow":true,"lastUpdateTS":1631977906},"261":{"tokenId":"261","price":0.14,"ownerAddress":"0x9dcf985075d94b3bf8eddb39d8b611d0d04888b8","ownerName":"forthekeks","buyNow":false,"lastUpdateTS":1631977906},"263":{"tokenId":"263","price":0.12,"ownerAddress":"0x5f8e696889c74bc6342ebd529e8b3bb9a6b98888","ownerName":"Tianshen","buyNow":true,"lastUpdateTS":1631977906},"267":{"tokenId":"267","price":0.88,"ownerAddress":"0x447dee1edb3677630580604d7c1871ebc06d0a92","ownerName":"few_vault_lol","buyNow":true,"lastUpdateTS":1631977906},"270":{"tokenId":"270","price":0.17,"ownerAddress":"0x44dc2ec15b3483fc8590f6b396cea5f8f2fbf3bd","ownerName":"LisiyXvost","buyNow":true,"lastUpdateTS":1631977908},"278":{"tokenId":"278","price":1.337,"ownerAddress":"0x0ec0cae629174c7724b7767e4769e69d773ac257","ownerName":"","buyNow":true,"lastUpdateTS":1631977908},"280":{"tokenId":"280","price":1.5,"ownerAddress":"0x046a0ab9cc2c01b78b569b33e5ecccf35fc5230d","ownerName":"babysatoshi2","buyNow":true,"lastUpdateTS":1631977908},"281":{"tokenId":"281","price":0.14,"ownerAddress":"0xed2a45611b967df5647a17dfeaa0dec40806de54","ownerName":"Snowball","buyNow":false,"lastUpdateTS":1631977908},"285":{"tokenId":"285","price":0.04,"ownerAddress":"0x40c839b831c90173dc7fbce49a25274a4688ddd9","ownerName":null,"buyNow":false,"lastUpdateTS":1631977908},"288":{"tokenId":"288","price":0.9,"ownerAddress":"0x4e18966fc3dc2521870aa29f4a2dfe26f3ea6868","ownerName":null,"buyNow":true,"lastUpdateTS":1631977908},"296":{"tokenId":"296","price":20,"ownerAddress":"0x44ddbb35cfebbafe98e402970517b33d8e925eb3","ownerName":"Codila","buyNow":true,"lastUpdateTS":1631977908},"300":{"tokenId":"300","price":0.89,"ownerAddress":"0x186e704dcc80f31367b351525d746f624c215d90","ownerName":null,"buyNow":true,"lastUpdateTS":1631977910},"318":{"tokenId":"318","price":0.05,"ownerAddress":"0x03db74df4ef8b29fe210abcf027c757747c14f00","ownerName":"gotoheaven","buyNow":true,"lastUpdateTS":1631977910},"324":{"tokenId":"324","price":0.04,"ownerAddress":"0x6e7399a04dc3cb909cf0656f4a77ab8a6d5da5c4","ownerName":"","buyNow":false,"lastUpdateTS":1631977910},"325":{"tokenId":"325","price":0.99,"ownerAddress":"0xb762620284cecfe51f4e0ed5ad8509b9f586e4ae","ownerName":"beubz","buyNow":true,"lastUpdateTS":1631977910},"329":{"tokenId":"329","price":0.058,"ownerAddress":"0x72789e708f8473eecf3119f4ff38772631138a39","ownerName":null,"buyNow":true,"lastUpdateTS":1631977910},"337":{"tokenId":"337","price":0.1,"ownerAddress":"0x186e704dcc80f31367b351525d746f624c215d90","ownerName":null,"buyNow":true,"lastUpdateTS":1631977912},"338":{"tokenId":"338","price":0.1337,"ownerAddress":"0x2e90196ac55716c80b4ac7ddd9b1bc06547e74d0","ownerName":null,"buyNow":true,"lastUpdateTS":1631977912},"342":{"tokenId":"342","price":0.3,"ownerAddress":"0x6fff184cc7fae40018f4a9c2f6e618f4d327a0e9","ownerName":"cvxddse","buyNow":true,"lastUpdateTS":1631977912},"353":{"tokenId":"353","price":0.09,"ownerAddress":"0x9f3ec768f7c5900409bbe39c74d50fb33d7afad1","ownerName":"Lynxed","buyNow":true,"lastUpdateTS":1631977912},"361":{"tokenId":"361","price":0.099,"ownerAddress":"0xe606a466aba5ca7d89b08bd19dd10c43b95814f6","ownerName":"cattail","buyNow":true,"lastUpdateTS":1631977914},"365":{"tokenId":"365","price":0.0666,"ownerAddress":"0x5f8e696889c74bc6342ebd529e8b3bb9a6b98888","ownerName":"Tianshen","buyNow":true,"lastUpdateTS":1631977914},"382":{"tokenId":"382","price":1,"ownerAddress":"0x8a3419ecdbf1f33cf8eaf3a572d56024f21c6f97","ownerName":"","buyNow":true,"lastUpdateTS":1631977914},"387":{"tokenId":"387","price":0.04,"ownerAddress":"0xc7d3aaafb2687469c6c55d8d4f1803e5a026b665","ownerName":"","buyNow":false,"lastUpdateTS":1631977914},"389":{"tokenId":"389","price":1,"ownerAddress":"0x16a7aa64872ff37a456de74b3783fbd4df3bd6d0","ownerName":"Neshinjoo","buyNow":true,"lastUpdateTS":1631977914},"393":{"tokenId":"393","price":0.09,"ownerAddress":"0xfa03749275bc8977a2e8bb8b773f6e5343c2393c","ownerName":"MissChocolat","buyNow":true,"lastUpdateTS":1631977917},"400":{"tokenId":"400","price":0.1,"ownerAddress":"0x186e704dcc80f31367b351525d746f624c215d90","ownerName":null,"buyNow":true,"lastUpdateTS":1631977917},"409":{"tokenId":"409","price":0.11,"ownerAddress":"0xcead03574e4b930ee871bf8bb49922148a63a8e6","ownerName":"-_-__---_----_","buyNow":true,"lastUpdateTS":1631977917},"420":{"tokenId":"420","price":4.2,"ownerAddress":"0x5ac5e9da579d9284cff21772de7dd34ea71f5c3b","ownerName":null,"buyNow":true,"lastUpdateTS":1631977919},"427":{"tokenId":"427","price":0.15,"ownerAddress":"0x5ac5e9da579d9284cff21772de7dd34ea71f5c3b","ownerName":null,"buyNow":true,"lastUpdateTS":1631977919},"435":{"tokenId":"435","price":1,"ownerAddress":"0x9757ac85a0399055fc22e29710b42f14f04b62c2","ownerName":null,"buyNow":true,"lastUpdateTS":1631977919},"443":{"tokenId":"443","price":0.9,"ownerAddress":"0x486cf0b50257d220efa36d49f034706702bfbd53","ownerName":null,"buyNow":true,"lastUpdateTS":1631977919},"453":{"tokenId":"453","price":2.5,"ownerAddress":"0x992702fa972962d150aa834c562fc1ddc7a659d8","ownerName":"sfxquan1","buyNow":true,"lastUpdateTS":1631977921},"458":{"tokenId":"458","price":0.19,"ownerAddress":"0x5966a41fd8588ae21fd0a01db36d1ba8c07d1ea5","ownerName":"Meire","buyNow":true,"lastUpdateTS":1631977921},"467":{"tokenId":"467","price":0.08,"ownerAddress":"0x9df4b6710b57842606044f457326cc698069372c","ownerName":"NFTnifty","buyNow":true,"lastUpdateTS":1631977921},"478":{"tokenId":"478","price":0.2,"ownerAddress":"0xd69f19f2cdcff9157856a4aa2c6018fbf34a562f","ownerName":"TerryBogard","buyNow":true,"lastUpdateTS":1631977921},"494":{"tokenId":"494","price":0.04,"ownerAddress":"0x86eddc20e558be3ecc55d4a111adac4d6ac4951d","ownerName":"Bartic","buyNow":false,"lastUpdateTS":1631977923},"496":{"tokenId":"496","price":0.5,"ownerAddress":"0x1fbe7279da134c53fa521f5ee65891948e775e17","ownerName":"invader777","buyNow":true,"lastUpdateTS":1631977923},"505":{"tokenId":"505","price":0.7,"ownerAddress":"0x5ac5e9da579d9284cff21772de7dd34ea71f5c3b","ownerName":null,"buyNow":true,"lastUpdateTS":1631977923},"510":{"tokenId":"510","price":0.7,"ownerAddress":"0x03db74df4ef8b29fe210abcf027c757747c14f00","ownerName":"gotoheaven","buyNow":true,"lastUpdateTS":1631977925},"519":{"tokenId":"519","price":1,"ownerAddress":"0x725313887d5651f0f2d676d354334b70cf84ec8a","ownerName":"","buyNow":true,"lastUpdateTS":1631977925},"538":{"tokenId":"538","price":1,"ownerAddress":"0x6e0149f6636692802ec409c0e0224108f08737de","ownerName":"","buyNow":true,"lastUpdateTS":1631977925},"545":{"tokenId":"545","price":0.21,"ownerAddress":"0x4b69189b1ae6f093d62d0f2f06e0c0625045e0c6","ownerName":"NFTMagic-","buyNow":true,"lastUpdateTS":1631977927},"550":{"tokenId":"550","price":0.1,"ownerAddress":"0x186e704dcc80f31367b351525d746f624c215d90","ownerName":null,"buyNow":true,"lastUpdateTS":1631977927},"577":{"tokenId":"577","price":1,"ownerAddress":"0xcc987f85c2150670a391e9bf6ddccb4b875b9826","ownerName":null,"buyNow":true,"lastUpdateTS":1631977929},"593":{"tokenId":"593","price":0.15,"ownerAddress":"0x6f8640af3d7b30878a162ad1aff402b16f13c129","ownerName":"3den","buyNow":true,"lastUpdateTS":1631977929},"594":{"tokenId":"594","price":0.49,"ownerAddress":"0x5ac5e9da579d9284cff21772de7dd34ea71f5c3b","ownerName":null,"buyNow":true,"lastUpdateTS":1631977929},"596":{"tokenId":"596","price":5,"ownerAddress":"0x7588f8f16e25e85399fe7c4cb66e24f9dfe2e825","ownerName":"Den969","buyNow":true,"lastUpdateTS":1631977929},"597":{"tokenId":"597","price":0.2,"ownerAddress":"0x38a63b0ae13d0d42bff525f7766bb3bdd7c2f68b","ownerName":"p0lyn","buyNow":true,"lastUpdateTS":1631977929},"602":{"tokenId":"602","price":1.45,"ownerAddress":"0xc6c36027878ba38964e4d5a60ddb20d09565354e","ownerName":null,"buyNow":true,"lastUpdateTS":1631977931},"611":{"tokenId":"611","price":0.03,"ownerAddress":"0xb0e84072216f0fdad84f1cd4afb80fb8ad294f5e","ownerName":"b0e8","buyNow":false,"lastUpdateTS":1631977931},"613":{"tokenId":"613","price":0.9,"ownerAddress":"0xb45f93c6b6e56075b94fc22d690474002b92fcc1","ownerName":"Gwei_Fieri","buyNow":true,"lastUpdateTS":1631977931},"619":{"tokenId":"619","price":0.2,"ownerAddress":"0x18246cdf6680712b57b355594d0c339163b33058","ownerName":"S33DD","buyNow":true,"lastUpdateTS":1631977931},"632":{"tokenId":"632","price":0.04,"ownerAddress":"0x96dc89dbe84970ee42a2f0b35fb50599e6745ff8","ownerName":"MetaSailor","buyNow":false,"lastUpdateTS":1631977935},"651":{"tokenId":"651","price":1.5,"ownerAddress":"0x3df77d2e34891de95898999df3e934a7e7037c4d","ownerName":null,"buyNow":true,"lastUpdateTS":1631977935},"669":{"tokenId":"669","price":0.669,"ownerAddress":"0xe606a466aba5ca7d89b08bd19dd10c43b95814f6","ownerName":"cattail","buyNow":true,"lastUpdateTS":1631977937},"670":{"tokenId":"670","price":0.07,"ownerAddress":"0xafd9d29947f51beb40f535f7eca1b98560d0b2c7","ownerName":"Waffles_jpeg","buyNow":true,"lastUpdateTS":1631977937},"673":{"tokenId":"673","price":100,"ownerAddress":"0x3fd74a183181ffe0356b69e340ad4762d830c295","ownerName":"zhimahu1","buyNow":true,"lastUpdateTS":1631977937},"676":{"tokenId":"676","price":0.1,"ownerAddress":"0x557f5a10d8e637167e6eeb3e9e4baf64da5bb8c5","ownerName":"DakDak","buyNow":true,"lastUpdateTS":1631977937},"685":{"tokenId":"685","price":0.7,"ownerAddress":"0xd435231bed0d4de8541d94ec93e1e094ae633b72","ownerName":"Alen31","buyNow":true,"lastUpdateTS":1631977937},"689":{"tokenId":"689","price":0.19,"ownerAddress":"0xb02160d146901e838f9e9e796296ece30c129e0a","ownerName":null,"buyNow":true,"lastUpdateTS":1631977937},"705":{"tokenId":"705","price":0.18,"ownerAddress":"0x03db74df4ef8b29fe210abcf027c757747c14f00","ownerName":"gotoheaven","buyNow":true,"lastUpdateTS":1631977940},"706":{"tokenId":"706","price":0.29,"ownerAddress":"0xe93c2fe3c5473c52099fb2121b8ae62cd7e68cef","ownerName":null,"buyNow":true,"lastUpdateTS":1631977940},"736":{"tokenId":"736","price":0.075,"ownerAddress":"0x1711bc52bf7e0494325799717fe640f1924617b7","ownerName":"Abdu_Rozik","buyNow":true,"lastUpdateTS":1631977943},"742":{"tokenId":"742","price":0.11,"ownerAddress":"0xfefe31009b95c04e062aa89c975fb61b5bd9e785","ownerName":null,"buyNow":true,"lastUpdateTS":1631977943},"754":{"tokenId":"754","price":0.08,"ownerAddress":"0x1857bbec6422992cd26e9446c8be673c786737c0","ownerName":"herlinadede","buyNow":true,"lastUpdateTS":1631977945},"765":{"tokenId":"765","price":0.1,"ownerAddress":"0x8b62c152d1d7a02ea27b2a80e361ec9e7e01dcea","ownerName":"Eymeri07","buyNow":true,"lastUpdateTS":1631977945},"777":{"tokenId":"777","price":0.777,"ownerAddress":"0xe606a466aba5ca7d89b08bd19dd10c43b95814f6","ownerName":"cattail","buyNow":true,"lastUpdateTS":1631977945},"800":{"tokenId":"800","price":0.22,"ownerAddress":"0x129ab3a1c3eb5c3d27183a9f55cafe21a8de49d7","ownerName":"129AB","buyNow":true,"lastUpdateTS":1631977947},"804":{"tokenId":"804","price":0.18,"ownerAddress":"0xf9ec946c7d7fa6189147eee1c2b7bf418e7eb705","ownerName":"iQEth","buyNow":true,"lastUpdateTS":1631977947},"814":{"tokenId":"814","price":0.03,"ownerAddress":"0x6c8d6b0847618d26e036d7e56b1d25f2ce20d402","ownerName":"","buyNow":false,"lastUpdateTS":1631977949},"817":{"tokenId":"817","price":0.11,"ownerAddress":"0xe606a466aba5ca7d89b08bd19dd10c43b95814f6","ownerName":"cattail","buyNow":true,"lastUpdateTS":1631977949},"838":{"tokenId":"838","price":1.121,"ownerAddress":"0xb2c2c1cc5906792a4d69c7c71584e739410d42cc","ownerName":"trash_can","buyNow":true,"lastUpdateTS":1631977949},"840":{"tokenId":"840","price":0.5,"ownerAddress":"0xe97d666a1238d5f54abe476c84b39c791276c0d7","ownerName":"0xe97d666a1238D5f54Abe476c84B39c791276C0D","buyNow":true,"lastUpdateTS":1631977951},"844":{"tokenId":"844","price":0.5,"ownerAddress":"0x1fbe7279da134c53fa521f5ee65891948e775e17","ownerName":"invader777","buyNow":true,"lastUpdateTS":1631977951},"845":{"tokenId":"845","price":1,"ownerAddress":"0x9a762d34b0661dcee59a59adfec3292f4fd8b785","ownerName":"koniyasu","buyNow":true,"lastUpdateTS":1631977951},"859":{"tokenId":"859","price":0.2,"ownerAddress":"0x6a0d078799f60c9a4a8c325e07800db05cc4e0ef","ownerName":"","buyNow":true,"lastUpdateTS":1631977951},"861":{"tokenId":"861","price":0.09,"ownerAddress":"0xb02160d146901e838f9e9e796296ece30c129e0a","ownerName":null,"buyNow":true,"lastUpdateTS":1631977951},"864":{"tokenId":"864","price":0.19,"ownerAddress":"0x6283511fc53c60c0a0a1848ac88ff46b5d2496ea","ownerName":"AshPicachu","buyNow":true,"lastUpdateTS":1631977951},"865":{"tokenId":"865","price":5,"ownerAddress":"0x5f8cfd3f2aa1cada3631e3b61f1d4c66ebcc2cf2","ownerName":"Runehodl","buyNow":true,"lastUpdateTS":1631977951},"868":{"tokenId":"868","price":0.35,"ownerAddress":"0xbcb1c9373b1214ce96ce847160e33660aa293fc8","ownerName":"ScrawnyJon","buyNow":true,"lastUpdateTS":1631977951},"883":{"tokenId":"883","price":0.5,"ownerAddress":"0xd683b78e988ba4bdb9fa0e2012c4c36b7cc96aad","ownerName":"_Smol_","buyNow":true,"lastUpdateTS":1631977953},"891":{"tokenId":"891","price":0.22,"ownerAddress":"0x862f01e6b2711677c12fe4cc4f3863ffb2e735cb","ownerName":null,"buyNow":true,"lastUpdateTS":1631977953},"900":{"tokenId":"900","price":0.69,"ownerAddress":"0xf7bf01eaa4722a919f54b960eba9741aebc7186b","ownerName":"_pinky923_","buyNow":true,"lastUpdateTS":1631977957},"908":{"tokenId":"908","price":0.09,"ownerAddress":"0xfb5461b2433de1236784dd29b6c6415732c16e9a","ownerName":"fjlknflkenfl","buyNow":true,"lastUpdateTS":1631977957},"916":{"tokenId":"916","price":0.5,"ownerAddress":"0x1fbe7279da134c53fa521f5ee65891948e775e17","ownerName":"invader777","buyNow":true,"lastUpdateTS":1631977957},"929":{"tokenId":"929","price":3.499,"ownerAddress":"0x9fadd95839a268ec1da1a0374a41c980b84a711d","ownerName":"Yetihouse","buyNow":true,"lastUpdateTS":1631977957},"932":{"tokenId":"932","price":1.5,"ownerAddress":"0x640fa770ea86752e5207051c34ca12b6c9d1484d","ownerName":null,"buyNow":true,"lastUpdateTS":1631977959},"933":{"tokenId":"933","price":1,"ownerAddress":"0x09befe62d0697a3e608c850f41d85d80369e7506","ownerName":null,"buyNow":true,"lastUpdateTS":1631977959},"949":{"tokenId":"949","price":5,"ownerAddress":"0x5b7a238ece076288d58104aaab26fa3fbf715957","ownerName":"Novarupta","buyNow":true,"lastUpdateTS":1631977959},"965":{"tokenId":"965","price":0.99,"ownerAddress":"0xdd3fcb301f7bc366494f153953575a7126a00808","ownerName":"hoggerspoggers","buyNow":true,"lastUpdateTS":1631977962},"968":{"tokenId":"968","price":0.98,"ownerAddress":"0xb02160d146901e838f9e9e796296ece30c129e0a","ownerName":null,"buyNow":true,"lastUpdateTS":1631977962},"975":{"tokenId":"975","price":0.15,"ownerAddress":"0xd3618cb2ea9daf1c5c948d367af2cd08a65ea9fd","ownerName":"brdfld","buyNow":true,"lastUpdateTS":1631977962},"988":{"tokenId":"988","price":0.15,"ownerAddress":"0xd983072e9b02ec3fb1a54144fd7754d7e5712a15","ownerName":"Darknight2020","buyNow":true,"lastUpdateTS":1631977962},"995":{"tokenId":"995","price":0.04,"ownerAddress":"0xa1733bc95272fdfb3d14b93e93aab1290b3ab7fe","ownerName":null,"buyNow":false,"lastUpdateTS":1631977967},"1001":{"tokenId":"1001","price":16.8888,"ownerAddress":"0xe987767226b681939d07749ed192870f9101a1d1","ownerName":"NFTCyberBot","buyNow":true,"lastUpdateTS":1631977967},"1005":{"tokenId":"1005","price":1,"ownerAddress":"0x5e7fd61d636ee2b9bf18a37493a52df0dceb5b66","ownerName":"X0502","buyNow":true,"lastUpdateTS":1631977967},"1020":{"tokenId":"1020","price":3,"ownerAddress":"0xfd04340f02398520296be10f785e6ee1f0f36b85","ownerName":"dgener8","buyNow":true,"lastUpdateTS":1631977970},"1025":{"tokenId":"1025","price":0.12,"ownerAddress":"0x37b3fae959f171767e34e33eaf7ee6e7be2842c3","ownerName":"COBRAlite","buyNow":false,"lastUpdateTS":1631977970},"1030":{"tokenId":"1030","price":0.99,"ownerAddress":"0xbefea1c9e6d0a95bf2a352ac1aa5ff1fadb01c8e","ownerName":"cryfire","buyNow":true,"lastUpdateTS":1631977970},"1033":{"tokenId":"1033","price":0.3,"ownerAddress":"0x4d5149a1f7f7277afd1bd2936db70c5fbcbecf2e","ownerName":"One_Man_Master","buyNow":true,"lastUpdateTS":1631977970},"1037":{"tokenId":"1037","price":0.04,"ownerAddress":"0x5f8e696889c74bc6342ebd529e8b3bb9a6b98888","ownerName":"Tianshen","buyNow":false,"lastUpdateTS":1631977970},"1038":{"tokenId":"1038","price":0.07,"ownerAddress":"0xbbca5797daf789bc215d59c1cb30edceff65ea5e","ownerName":"A5","buyNow":true,"lastUpdateTS":1631977970},"1046":{"tokenId":"1046","price":0.099,"ownerAddress":"0x3fa99ea896f716d0cfbe370a8f6bec32a880f6dc","ownerName":"LutkarmaVault","buyNow":true,"lastUpdateTS":1631977970},"1050":{"tokenId":"1050","price":1.5,"ownerAddress":"0x04c4a90801d1ef5ae8576a0a5bdd8eeab362a644","ownerName":"m_e","buyNow":true,"lastUpdateTS":1631977973},"1053":{"tokenId":"1053","price":0.1,"ownerAddress":"0x03db74df4ef8b29fe210abcf027c757747c14f00","ownerName":"gotoheaven","buyNow":true,"lastUpdateTS":1631977973},"1055":{"tokenId":"1055","price":0.377,"ownerAddress":"0x502bb5979a85d2721d5025569164516f45c6c01d","ownerName":"Upstrik","buyNow":true,"lastUpdateTS":1631977973},"1057":{"tokenId":"1057","price":0.085,"ownerAddress":"0x44dc2ec15b3483fc8590f6b396cea5f8f2fbf3bd","ownerName":"LisiyXvost","buyNow":true,"lastUpdateTS":1631977973},"1058":{"tokenId":"1058","price":0.2,"ownerAddress":"0xe2b9f0757a9e2813fae323aefd89ec8be706104a","ownerName":"docshouse","buyNow":true,"lastUpdateTS":1631977973},"1070":{"tokenId":"1070","price":1.25,"ownerAddress":"0xe93c2fe3c5473c52099fb2121b8ae62cd7e68cef","ownerName":null,"buyNow":true,"lastUpdateTS":1631977973},"1081":{"tokenId":"1081","price":0.5,"ownerAddress":"0xd683b78e988ba4bdb9fa0e2012c4c36b7cc96aad","ownerName":"_Smol_","buyNow":true,"lastUpdateTS":1631977976},"1085":{"tokenId":"1085","price":0.1,"ownerAddress":"0x95b9b364fec724a26b38d940d4c4862516ec0b3c","ownerName":"Impose","buyNow":true,"lastUpdateTS":1631977976},"1087":{"tokenId":"1087","price":0.04,"ownerAddress":"0x98b7c27df27c857536c61adea0d3c9c7e327432d","ownerName":"","buyNow":false,"lastUpdateTS":1631977976},"1098":{"tokenId":"1098","price":0.2,"ownerAddress":"0xb5e956bdd4e25e8990bba58102231d74f4513656","ownerName":"boobabooba","buyNow":true,"lastUpdateTS":1631977976},"1115":{"tokenId":"1115","price":5,"ownerAddress":"0x5b7a238ece076288d58104aaab26fa3fbf715957","ownerName":"Novarupta","buyNow":true,"lastUpdateTS":1631977978},"1119":{"tokenId":"1119","price":99,"ownerAddress":"0xd858113cf2814e7d4de85fe705d06d7db07ebc56","ownerName":null,"buyNow":true,"lastUpdateTS":1631977978},"1130":{"tokenId":"1130","price":4,"ownerAddress":"0x7a237a323cd979b57ffd26b0bee913f8dbf9dc31","ownerName":null,"buyNow":true,"lastUpdateTS":1631977978},"1137":{"tokenId":"1137","price":1,"ownerAddress":"0xf22f9e9fea9f8548c9f86ab0ec349b62635a9c87","ownerName":null,"buyNow":true,"lastUpdateTS":1631977978}}
+{
+  "0": {
+    "tokenId": "0",
+    "price": 28.88,
+    "ownerAddress": "0xec0297f0a72286c92e826e3b55bd61ad31986dfe",
+    "ownerName": "DTSnft",
+    "buyNow": true,
+    "lastUpdateTS": 1631983546
+  },
+  "1": {
+    "tokenId": "1",
+    "price": 1000,
+    "ownerAddress": "0x3471884f189fd7c63fe8c83601d28ce0cc1b3853",
+    "ownerName": "leoilman",
+    "buyNow": true,
+    "lastUpdateTS": 1631983546
+  },
+  "3": {
+    "tokenId": "3",
+    "price": 1003,
+    "ownerAddress": "0x7a237a323cd979b57ffd26b0bee913f8dbf9dc31",
+    "ownerName": null,
+    "buyNow": true,
+    "lastUpdateTS": 1631983546
+  },
+  "5": {
+    "tokenId": "5",
+    "price": 8888,
+    "ownerAddress": "0x37b3fae959f171767e34e33eaf7ee6e7be2842c3",
+    "ownerName": "COBRAlite",
+    "buyNow": true,
+    "lastUpdateTS": 1631983546
+  },
+  "7": {
+    "tokenId": "7",
+    "price": 0.1,
+    "ownerAddress": "0x4d9d3e18ed6f62018a84d654201938b78689399a",
+    "ownerName": null,
+    "buyNow": false,
+    "lastUpdateTS": 1631983546
+  },
+  "8": {
+    "tokenId": "8",
+    "price": 0.1,
+    "ownerAddress": "0x4d9d3e18ed6f62018a84d654201938b78689399a",
+    "ownerName": null,
+    "buyNow": false,
+    "lastUpdateTS": 1631983546
+  },
+  "9": {
+    "tokenId": "9",
+    "price": 0.1,
+    "ownerAddress": "0x4d9d3e18ed6f62018a84d654201938b78689399a",
+    "ownerName": null,
+    "buyNow": false,
+    "lastUpdateTS": 1631983546
+  },
+  "14": {
+    "tokenId": "14",
+    "price": 0.065,
+    "ownerAddress": "0x4d9d3e18ed6f62018a84d654201938b78689399a",
+    "ownerName": null,
+    "buyNow": false,
+    "lastUpdateTS": 1631983546
+  },
+  "15": {
+    "tokenId": "15",
+    "price": 0.1,
+    "ownerAddress": "0x4d9d3e18ed6f62018a84d654201938b78689399a",
+    "ownerName": null,
+    "buyNow": false,
+    "lastUpdateTS": 1631983546
+  },
+  "22": {
+    "tokenId": "22",
+    "price": 0.07,
+    "ownerAddress": "0x01296c73e761e565074b7d5fb296fd4c3e1ba924",
+    "ownerName": "onetonine",
+    "buyNow": true,
+    "lastUpdateTS": 1631983546
+  },
+  "23": {
+    "tokenId": "23",
+    "price": 0.12,
+    "ownerAddress": "0x01296c73e761e565074b7d5fb296fd4c3e1ba924",
+    "ownerName": "onetonine",
+    "buyNow": true,
+    "lastUpdateTS": 1631983546
+  },
+  "24": {
+    "tokenId": "24",
+    "price": 0.12,
+    "ownerAddress": "0x01296c73e761e565074b7d5fb296fd4c3e1ba924",
+    "ownerName": "onetonine",
+    "buyNow": true,
+    "lastUpdateTS": 1631983546
+  },
+  "26": {
+    "tokenId": "26",
+    "price": 0.12,
+    "ownerAddress": "0x01296c73e761e565074b7d5fb296fd4c3e1ba924",
+    "ownerName": "onetonine",
+    "buyNow": true,
+    "lastUpdateTS": 1631983546
+  },
+  "27": {
+    "tokenId": "27",
+    "price": 0.12,
+    "ownerAddress": "0x01296c73e761e565074b7d5fb296fd4c3e1ba924",
+    "ownerName": "onetonine",
+    "buyNow": true,
+    "lastUpdateTS": 1631983546
+  },
+  "30": {
+    "tokenId": "30",
+    "price": 0.12,
+    "ownerAddress": "0x01296c73e761e565074b7d5fb296fd4c3e1ba924",
+    "ownerName": "onetonine",
+    "buyNow": true,
+    "lastUpdateTS": 1631983548
+  },
+  "31": {
+    "tokenId": "31",
+    "price": 0.49,
+    "ownerAddress": "0x5e4038eb6f1e7316a45ed569e94c8cd1706a5ec5",
+    "ownerName": "ali",
+    "buyNow": true,
+    "lastUpdateTS": 1631983548
+  },
+  "33": {
+    "tokenId": "33",
+    "price": 0.12,
+    "ownerAddress": "0x01296c73e761e565074b7d5fb296fd4c3e1ba924",
+    "ownerName": "onetonine",
+    "buyNow": true,
+    "lastUpdateTS": 1631983548
+  },
+  "37": {
+    "tokenId": "37",
+    "price": 0.07,
+    "ownerAddress": "0x01296c73e761e565074b7d5fb296fd4c3e1ba924",
+    "ownerName": "onetonine",
+    "buyNow": true,
+    "lastUpdateTS": 1631983548
+  },
+  "38": {
+    "tokenId": "38",
+    "price": 0.12,
+    "ownerAddress": "0x01296c73e761e565074b7d5fb296fd4c3e1ba924",
+    "ownerName": "onetonine",
+    "buyNow": true,
+    "lastUpdateTS": 1631983548
+  },
+  "41": {
+    "tokenId": "41",
+    "price": 0.07,
+    "ownerAddress": "0x01296c73e761e565074b7d5fb296fd4c3e1ba924",
+    "ownerName": "onetonine",
+    "buyNow": true,
+    "lastUpdateTS": 1631983548
+  },
+  "44": {
+    "tokenId": "44",
+    "price": 1,
+    "ownerAddress": "0xb47f6f295af0646177f46f19656177eb462c1867",
+    "ownerName": null,
+    "buyNow": true,
+    "lastUpdateTS": 1631983548
+  },
+  "49": {
+    "tokenId": "49",
+    "price": 0.12,
+    "ownerAddress": "0x01296c73e761e565074b7d5fb296fd4c3e1ba924",
+    "ownerName": "onetonine",
+    "buyNow": true,
+    "lastUpdateTS": 1631983548
+  },
+  "58": {
+    "tokenId": "58",
+    "price": 0.07,
+    "ownerAddress": "0x01296c73e761e565074b7d5fb296fd4c3e1ba924",
+    "ownerName": "onetonine",
+    "buyNow": true,
+    "lastUpdateTS": 1631983548
+  },
+  "62": {
+    "tokenId": "62",
+    "price": 0.04,
+    "ownerAddress": "0xa53a04acf0ab015c2cf14174c63c842ca90b5f06",
+    "ownerName": "SoLegendary",
+    "buyNow": false,
+    "lastUpdateTS": 1631983549
+  },
+  "66": {
+    "tokenId": "66",
+    "price": 0.248,
+    "ownerAddress": "0x4cf8be01027ad66c4939181a5b8c5b2b281771f0",
+    "ownerName": "AKIMA",
+    "buyNow": true,
+    "lastUpdateTS": 1631983549
+  },
+  "69": {
+    "tokenId": "69",
+    "price": 6.9,
+    "ownerAddress": "0x5ac5e9da579d9284cff21772de7dd34ea71f5c3b",
+    "ownerName": null,
+    "buyNow": true,
+    "lastUpdateTS": 1631983549
+  },
+  "85": {
+    "tokenId": "85",
+    "price": 0.05,
+    "ownerAddress": "0x63a64ecf0a751288e54aee7356842e448ea9485c",
+    "ownerName": "j4ffa",
+    "buyNow": true,
+    "lastUpdateTS": 1631983549
+  },
+  "88": {
+    "tokenId": "88",
+    "price": 88,
+    "ownerAddress": "0x0c6306c1ff8f0ca8432b761085d5ce74160a499a",
+    "ownerName": "jpeg_kollector",
+    "buyNow": true,
+    "lastUpdateTS": 1631983549
+  },
+  "95": {
+    "tokenId": "95",
+    "price": 0.49,
+    "ownerAddress": "0x5ac5e9da579d9284cff21772de7dd34ea71f5c3b",
+    "ownerName": null,
+    "buyNow": true,
+    "lastUpdateTS": 1631983552
+  },
+  "97": {
+    "tokenId": "97",
+    "price": 0.977,
+    "ownerAddress": "0x862f01e6b2711677c12fe4cc4f3863ffb2e735cb",
+    "ownerName": null,
+    "buyNow": true,
+    "lastUpdateTS": 1631983552
+  },
+  "113": {
+    "tokenId": "113",
+    "price": 0.41,
+    "ownerAddress": "0xe969bf18fbc0ed94fbeb0821d347d0525a2c880a",
+    "ownerName": "EthNFTguy",
+    "buyNow": true,
+    "lastUpdateTS": 1631983552
+  },
+  "124": {
+    "tokenId": "124",
+    "price": 0.085,
+    "ownerAddress": "0xbf042d59f8230e40e8569bbc221de7b2578d0a22",
+    "ownerName": "FluffyShrine",
+    "buyNow": true,
+    "lastUpdateTS": 1631983554
+  },
+  "134": {
+    "tokenId": "134",
+    "price": 0.2,
+    "ownerAddress": "0xd87819df2c7fcec834c62202b28300ae460a1b17",
+    "ownerName": "ddthvn",
+    "buyNow": true,
+    "lastUpdateTS": 1631983554
+  },
+  "138": {
+    "tokenId": "138",
+    "price": 0.18,
+    "ownerAddress": "0xb581ba86bee1efa3d9dec30dafc8e87253458476",
+    "ownerName": null,
+    "buyNow": true,
+    "lastUpdateTS": 1631983554
+  },
+  "150": {
+    "tokenId": "150",
+    "price": 0.15,
+    "ownerAddress": "0x03db74df4ef8b29fe210abcf027c757747c14f00",
+    "ownerName": "gotoheaven",
+    "buyNow": true,
+    "lastUpdateTS": 1631983556
+  },
+  "156": {
+    "tokenId": "156",
+    "price": 0.05,
+    "ownerAddress": "0x77acc06250552c8a96e9560670328974386d632f",
+    "ownerName": null,
+    "buyNow": false,
+    "lastUpdateTS": 1631983556
+  },
+  "165": {
+    "tokenId": "165",
+    "price": 0.07,
+    "ownerAddress": "0xb1776c152080228214c2e84e39a93311ff3c03c1",
+    "ownerName": "eeeeeeeeee44444444444444",
+    "buyNow": false,
+    "lastUpdateTS": 1631983556
+  },
+  "169": {
+    "tokenId": "169",
+    "price": 0.025,
+    "ownerAddress": "0x3624c808b025fa95402b13860de4d43b39999bbd",
+    "ownerName": "Zilj",
+    "buyNow": false,
+    "lastUpdateTS": 1631983556
+  },
+  "177": {
+    "tokenId": "177",
+    "price": 0.1,
+    "ownerAddress": "0x5a45fa1d4ffc1428dc50f9df6fd1643f1012a39d",
+    "ownerName": null,
+    "buyNow": true,
+    "lastUpdateTS": 1631983556
+  },
+  "180": {
+    "tokenId": "180",
+    "price": 2,
+    "ownerAddress": "0xb70ea99cd14f39328534415e1c06c03d71598c70",
+    "ownerName": "",
+    "buyNow": true,
+    "lastUpdateTS": 1631983559
+  },
+  "181": {
+    "tokenId": "181",
+    "price": 0.3,
+    "ownerAddress": "0x4d5149a1f7f7277afd1bd2936db70c5fbcbecf2e",
+    "ownerName": "One_Man_Master",
+    "buyNow": true,
+    "lastUpdateTS": 1631983559
+  },
+  "183": {
+    "tokenId": "183",
+    "price": 0.4,
+    "ownerAddress": "0x18537f0ea71aff6e2f15a79e672822943ebb2d3f",
+    "ownerName": "",
+    "buyNow": true,
+    "lastUpdateTS": 1631983559
+  }
+}
