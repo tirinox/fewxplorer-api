@@ -30,10 +30,12 @@ function setupRouter(db) {
 function runServerAPI(db) {
     const app = new Koa();
 
-    app.use(KoaLogger())
     app.use(cors({
         origin: '*'
     }))
+
+    app.use(KoaLogger())
+
     const router = setupRouter(db)
     app.use(router.routes()).use(router.allowedMethods())
 
