@@ -1,6 +1,7 @@
 const Koa = require('koa')
 const KoaLogger = require('koa-logger')
 const KoaRouter = require('koa-router')
+const cors = require('@koa/cors')
 const {nowTS} = require("./util");
 
 function setupRouter(db) {
@@ -30,6 +31,9 @@ function runServerAPI(db) {
     const app = new Koa();
 
     app.use(KoaLogger())
+    app.use(cors({
+        origin: '*'
+    }))
     const router = setupRouter(db)
     app.use(router.routes()).use(router.allowedMethods())
 
