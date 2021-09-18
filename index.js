@@ -4,13 +4,19 @@ DotEnv.config()
 const {runServerAPI} = require("./src/api");
 const {OpenSeaJob} = require("./src/job");
 const {DB} = require("./src/db");
+const {simpleProgression} = require("./src/util");
 
-const db = new DB()
+async function main() {
+    const db = new DB()
+    await db.loadAllTokenPrices()
 
-// todo: scan SmartContract to get the actial tokenId list (it will change when breeding starts)
-const tokenIds = OpenSeaJob.simpleProgression(0, 9999)
+    // todo: scan SmartContract to get the actial tokenId list (it will change when breeding starts)
+    const tokenIds = simpleProgression(0, 9999)
 
-const job = new OpenSeaJob(db, tokenIds, 30, 1.01)
-job.run()
+    const job = new OpenSeaJob(db, tokenIds, 30, 1.51)
+    job.run()
 
-runServerAPI(db)
+    runServerAPI(db)
+}
+
+main().then(() => {})

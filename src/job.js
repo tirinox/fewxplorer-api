@@ -1,16 +1,8 @@
 const {getTokensOpenSea} = require("./opensea");
+const {timeout} = require("./util");
 
-function timeout(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 class OpenSeaJob {
-    static simpleProgression(start, end) {
-        return Array(end - start + 1)
-            .fill(0)
-            .map((element, index) => index + start)
-    }
-
     constructor(db, allTokenIds, batchSize = 50,
                 delay = 1.01) {
         this.allTokenIds = allTokenIds
@@ -21,6 +13,11 @@ class OpenSeaJob {
         this._isRunning = false
 
         this.db = db
+    }
+
+    rewind(p) {
+        this._currentIndex = +p
+        return this
     }
 
     run() {
@@ -44,7 +41,20 @@ class OpenSeaJob {
 
             try {
                 const batchIds = this.allTokenIds.slice(this._currentIndex, this._currentIndex + this.batchSize)
-                const tokenInfo = await getTokensOpenSea(batchIds)
+
+                // fixme --------------------------------
+                // const tokenInfo = await getTokensOpenSea(batchIds)
+                const tokenInfo = {
+                    "181": {
+                        "tokenId": "181",
+                        "price": 0.3,
+                        "ownerAddress": "0x4d5149a1f7f7277afd1bd2936db70c5fbcbecf2e",
+                        "ownerName": "One_Man_Master",
+                        "buyNow": true,
+                        "lastUpdateTS": 1631983559
+                    }
+                }
+                // fixme --------------------------------
 
                 await this.db.saveNewPrices(tokenInfo)
             } catch (e) {
