@@ -42,20 +42,8 @@ class OpenSeaJob {
             try {
                 const batchIds = this.allTokenIds.slice(this._currentIndex, this._currentIndex + this.batchSize)
 
-                // fixme --------------------------------
-                // const tokenInfo = await getTokensOpenSea(batchIds)
-                const tokenInfo = {
-                    "181": {
-                        "tokenId": "181",
-                        "price": 0.3,
-                        "ownerAddress": "0x4d5149a1f7f7277afd1bd2936db70c5fbcbecf2e",
-                        "ownerName": "One_Man_Master",
-                        "buyNow": true,
-                        "lastUpdateTS": 1631983559
-                    }
-                }
-                // fixme --------------------------------
-
+                const tokenInfo = await getTokensOpenSea(batchIds)
+                
                 await this.db.saveNewPrices(tokenInfo)
             } catch (e) {
                 console.error(`job tick failed: ${e}!`)
