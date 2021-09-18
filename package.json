@@ -10,11 +10,14 @@
   "dependencies": {
     "axios": "^0.21.4",
     "dotenv": "^10.0.0",
+    "koa": "^2.13.1",
+    "koa-logger": "^3.2.1",
+    "koa-router": "^10.1.1",
+    "mysql": "^2.18.1",
     "web3": "^1.5.2"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
-    "@babel/node": "^7.15.4",
     "@babel/preset-env": "^7.15.6"
   },
   "scripts": {
