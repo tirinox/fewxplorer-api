@@ -4,10 +4,12 @@ const {timeout} = require("./util");
 
 class OpenSeaJob {
     constructor(db, allTokenIds, batchSize = 50,
-                delay = 1.01) {
+                delay = 1.01,
+                restAfterWork = 60 * 15) {
         this.allTokenIds = allTokenIds
         this.batchSize = batchSize
         this.delay = delay
+        this.restAfterWork = restAfterWork
 
         this._currentIndex = 0
         this._isRunning = false
@@ -54,13 +56,14 @@ class OpenSeaJob {
             this._currentIndex += this.batchSize
             if (this._currentIndex > this.allTokenIds.length) {
                 this._currentIndex = 0
+                await this._delay(this.restAfterWork)
             }
-            await this._delay()
+            await this._delay(this.delay)
         }
     }
 
-    async _delay() {
-        await timeout(this.delay * 1000.0)
+    async _delay(delay) {
+        await timeout(delay * 1000.0)
     }
 }
 
