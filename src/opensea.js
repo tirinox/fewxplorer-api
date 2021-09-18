@@ -1,10 +1,11 @@
 const axios = require("axios");
 
-const ETH_BIG_DIV = BigInt("1000000000000000000")
-const ETH_PREC = BigInt("100000")
+const ETH_BIG_DIV = Math.pow(10, 18)
+const ETH_PREC = 10000
 
 function convertEthToFloat(x) {
-    return Number(BigInt(x) * ETH_PREC / ETH_BIG_DIV) / Number(ETH_PREC)
+    // return Number(BigInt(x) * ETH_PREC / ETH_BIG_DIV) / Number(ETH_PREC)
+    return Math.round(Number(x) / ETH_BIG_DIV * ETH_PREC) / ETH_PREC
 }
 
 async function getTokensOpenSea(ids) {
@@ -29,7 +30,8 @@ async function getTokensOpenSea(ids) {
             tokenId,
             price,
             ownerAddress: owner.address,
-            ownerName: owner.user.username
+            ownerName: owner.user.username,
+            buyNow: (order.side === 1)
         }
     }
     return results
