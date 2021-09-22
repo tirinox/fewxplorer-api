@@ -3,13 +3,15 @@ const {timeout} = require("./util");
 
 
 class OpenSeaJob {
-    constructor(db, allTokenIds, batchSize = 50,
+    constructor(db, allTokenIds, contract,
+                batchSize = 50,
                 delay = 1.01,
                 restAfterWork = 60 * 15) {
         this.allTokenIds = allTokenIds
         this.batchSize = batchSize
         this.delay = delay
         this.restAfterWork = restAfterWork
+        this.contract = contract
 
         this._currentIndex = 0
         this._isRunning = false
@@ -37,6 +39,21 @@ class OpenSeaJob {
         console.info('OpenSeaJob stopped.')
     }
 
+    async _fetchOpenSea(batchIds) {
+        let offset = 0
+        const allResults = {}
+        while (1) {
+            const oneBatchResults = await getTokensOpenSea(this.contract, batchIds, offset)
+            Object.assign(allResults, oneBatchResults)
+
+            if(Object.keys(oneBatchResults).length < this.batchSize) {
+                break
+            }
+            offset += this.batchSize
+        }
+        return allResults
+    }
+
     async _job() {
         while (this._isRunning) {
             console.log(`OpenSeaJob tick. From ${this._currentIndex} ID to ${this._currentIndex + this.batchSize} ID`)
@@ -44,9 +61,9 @@ class OpenSeaJob {
             try {
                 const batchIds = this.allTokenIds.slice(this._currentIndex, this._currentIndex + this.batchSize)
 
-                const tokenInfo = await getTokensOpenSea(batchIds)
+                const tokenInfo = await this._fetchOpenSea(batchIds)
 
-                await this.db.saveNewPrices(tokenInfo)
+                await this.db.saveNewPrices(tokenInfo, batchIds)
             } catch (e) {
                 console.error(`job tick failed: ${e}!`)
                 await this._delay()

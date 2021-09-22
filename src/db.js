@@ -22,7 +22,7 @@ class DB {
         return nowTS() - this.lastSuccessTS
     }
 
-    async saveNewPrices(newItems) {
+    async saveNewPrices(newItems, idsRequested) {
         try {
             if(!newItems) {
                 return
@@ -31,6 +31,7 @@ class DB {
             const now = nowTS()
             this.lastSuccessTS = now
             let nNewKeys = 0
+
             for(let key of Object.keys(newItems)) {
                 newItems[key].lastUpdateTS = now
                 ++nNewKeys
@@ -39,6 +40,21 @@ class DB {
             console.log(`saveNewPrices: newItems ${nNewKeys}`)
             for(const [k, v] of Object.entries(newItems)) {
                 this.priceDB[k] = v
+            }
+
+            if(Array.isArray(idsRequested)) {
+                const idsToRemove = []
+                for(const id of idsRequested) {
+                    if(!newItems[id]) {
+                        if(this.priceDB[id]) {
+                            delete this.priceDB[id]
+                            idsToRemove.push(id)
+                        }
+                    }
+                }
+                if(idsToRemove.length > 0) {
+                    console.info("I removed those ids: ", idsToRemove.join(', '))
+                }
             }
 
             await fs.writeFile(PRICE_PATH, JSON.stringify(this.priceDB))

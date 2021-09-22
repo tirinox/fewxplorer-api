@@ -35,12 +35,15 @@ function getProxyConfig() {
     }
 }
 
-async function getTokensOpenSea(ids) {
-    let url = "https://api.opensea.io/wyvern/v1/orders?asset_contract_address=0xad5f6cdda157694439ef9f6dd409424321c74628&bundled=false&include_bundled=false&include_invalid=false&limit=30&offset=0&order_by=eth_price&order_direction=desc"
+async function getTokensOpenSea(contract, ids, offset, batchSize) {
+    offset = offset || 0
+    batchSize = batchSize || 30
+    let url = `https://api.opensea.io/wyvern/v1/orders?asset_contract_address=${contract}&bundled=false` +
+        `&include_bundled=false&include_invalid=false&limit=${batchSize}&offset=${offset}&order_by=eth_price&order_direction=desc`
     for(const id of ids) {
         url += `&token_ids=${id}`
     }
-    // console.info(url)
+    console.info(`Offset = ${offset}`)
     const cfg = getProxyConfig()
 
     const data = await axios.get(url, cfg)
@@ -49,15 +52,20 @@ async function getTokensOpenSea(ids) {
 
     const results = {}
     for(let order of orders) {
-        const tokenId = order.asset.token_id
+        const ass = order.asset
+        const tokenId = ass.token_id
         const price = convertEthToFloat(order.current_price)
-        const owner = order.asset.owner
+        // const owner = ass.owner
+
+        const hasTaker = order.taker && order.taker.address !== '0x0000000000000000000000000000000000000000'
+        const hasMaker = order.maker && order.maker.address !== '0x0000000000000000000000000000000000000000'
+
         results[tokenId.toString()] = {
             tokenId,
             price,
-            ownerAddress: owner.address,
-            ownerName: (owner.user !== null ? owner.user.username : ''),
-            buyNow: (order.side === 1)
+            m: hasMaker ? 1 : 0,
+            t: hasTaker ? 1 : 0,
+            buyNow: (order.side === 1),
         }
     }
     return results
