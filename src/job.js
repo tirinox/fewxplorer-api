@@ -3,11 +3,11 @@ const {timeout} = require("./util");
 
 
 class OpenSeaJob {
-    constructor(db, allTokenIds, contract,
+    constructor(db, dbTokenIds, contract,
                 batchSize = 50,
                 delay = 1.01,
                 restAfterWork = 60 * 15) {
-        this.allTokenIds = allTokenIds
+        this.dbTokenIds = dbTokenIds
         this.batchSize = batchSize
         this.delay = delay
         this.restAfterWork = restAfterWork
@@ -54,19 +54,23 @@ class OpenSeaJob {
         return allResults
     }
 
+    _getAllTokenIds() {
+        return this.dbTokenIds.getAll()
+    }
+
     async _job() {
         while (this._isRunning) {
             console.log(`OpenSeaJob tick. From ${this._currentIndex} ID to ${this._currentIndex + this.batchSize} ID`)
 
             try {
-                const batchIds = this.allTokenIds.slice(this._currentIndex, this._currentIndex + this.batchSize)
+                const batchIds = this._getAllTokenIds().slice(this._currentIndex, this._currentIndex + this.batchSize)
 
                 const tokenInfo = await this._fetchOpenSea(batchIds)
 
                 await this.db.saveNewPrices(tokenInfo, batchIds)
             } catch (e) {
                 console.error(`job tick failed: ${e}!`)
-                await this._delay()
+                await this._delay(this.delay)
                 continue  // try again the same page!
             }
 

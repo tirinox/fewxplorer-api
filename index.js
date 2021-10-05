@@ -3,26 +3,29 @@ DotEnv.config()
 
 const {runServerAPI} = require("./src/api");
 const {OpenSeaJob} = require("./src/job");
-const {DB} = require("./src/db");
-const {simpleProgression} = require("./src/util");
+const {DBPrice} = require("./src/dbPrice");
+const {DBTokenIds} = require("./src/dbTokenIds");
+const {JobTokenIds} = require("./src/jobTokenIds");
+const {PRICE_PATH, TOKEN_IDS_PATH, FEWMAN_CONTRACT, DELAY, REST_AFTER_WORK, INFURA_ID, BATCH_SIZE, ABI_PATH} = require("./config");
+const {FewmanContract} = require("./src/smartcontract");
 
-const BATCH_SIZE = 30
-const DELAY = 2.51 // sec
-const REST_AFTER_WORK = 15 * 60 // 15 minute
-const MAX_TOKEN_ID = 9999
-const FEWMAN_CONTRACT = process.env.CONTRACT || '0xad5f6cdda157694439ef9f6dd409424321c74628'
 
 async function main() {
-    const db = new DB()
-    await db.loadAllTokenPrices()
+    const dbPrice = new DBPrice(PRICE_PATH)
+    await dbPrice.loadAllTokenPrices()
 
-    // todo: scan SmartContract to get the actial tokenId list (it will change when breeding starts)
-    const tokenIds = simpleProgression(0, MAX_TOKEN_ID)
+    const dbTokenIds = new DBTokenIds(TOKEN_IDS_PATH)
+    await dbTokenIds.loadAllTokens()
 
-    const job = new OpenSeaJob(db, tokenIds, FEWMAN_CONTRACT, BATCH_SIZE, DELAY, REST_AFTER_WORK)
-    job.run()
+    const fewmanContract = new FewmanContract(INFURA_ID, FEWMAN_CONTRACT, ABI_PATH)
+    const jobTokenIds = new JobTokenIds(dbTokenIds, fewmanContract, DELAY, REST_AFTER_WORK)
+    jobTokenIds.run()
 
-    runServerAPI(db)
+    const jobOpenSeaPrices = new OpenSeaJob(dbPrice, dbTokenIds, FEWMAN_CONTRACT, BATCH_SIZE, DELAY, REST_AFTER_WORK)
+    jobOpenSeaPrices.run()
+
+    runServerAPI(dbPrice, dbTokenIds)
 }
 
-main().then(() => {})
+main().then(() => {
+})

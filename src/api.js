@@ -15,7 +15,7 @@ function setupRouter(db) {
 
     router
         .get('/', (ctx, next) => {
-            ctx.body = 'Hello World!';
+            ctx.body = "This is FEWMan's API!"
         })
         .get('/opensea', async (ctx, next) => {
             ctx.body = {
@@ -27,7 +27,7 @@ function setupRouter(db) {
     return router
 }
 
-function runServerAPI(db) {
+function runServerAPI(dbPrice, dbTokensIds) {
     const app = new Koa();
 
     app.use(cors({
@@ -36,7 +36,7 @@ function runServerAPI(db) {
 
     app.use(KoaLogger())
 
-    const router = setupRouter(db)
+    const router = setupRouter(dbPrice)
     app.use(router.routes()).use(router.allowedMethods())
 
     app.use(ctx => {
@@ -52,7 +52,6 @@ function runServerAPI(db) {
 module.exports = {
     runServerAPI
 }
-
 
 
 // const {FewmanContract} = require("./smartcontract");
