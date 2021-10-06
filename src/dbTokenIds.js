@@ -27,21 +27,23 @@ class DBTokenIds {
         }
     }
 
+    get allData() {
+        return {
+            ids: this.tokenIds,
+            lastSuccessTS: this.lastSuccessTS,
+            total: this.total,
+        }
+    }
+
     async saveToFile() {
         try {
-            const now = nowTS()
-
-            const stringData = JSON.stringify({
-                ids: this.tokenIds,
-                lastSuccessTS: now,
-                total: this.total,
-            }, null, 2)
-
+            const oldTs = this.lastSuccessTS
+            this.lastSuccessTS = nowTS()
+            const stringData = JSON.stringify(this.allData, null, 2)
             await fs.writeFile(this.filePath, stringData)
-
-            this.lastSuccessTS = now
             console.info(`DBTokenIds saved to "${this.filePath}"!`)
         } catch (e) {
+            this.lastSuccessTS = oldTs
             console.error(`DBTokenIds save error ${e}.`)
         }
     }

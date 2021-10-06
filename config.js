@@ -20,7 +20,7 @@ const Config = {
     TOKEN_IDS_DELAY_IDLE: 60.0,  // sec
     TOKEN_IDS_DELAY_TICK: 2.0,  // sec
 
-    SAVE_EVERY_SEC: 2.0,  // Todo: 20 sec
+    SAVE_EVERY_SEC: 15.0,
 }
 
 module.exports = {

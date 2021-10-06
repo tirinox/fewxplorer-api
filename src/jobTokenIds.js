@@ -97,15 +97,14 @@ class JobTokenIds {
     async _job() {
         this._isRunning = true
         while (this._isRunning) {
-            await this._protectedJobTick()
-            // try {
-            //     console.info('JobTokenIds tick start')
-            //     await this._protectedJobTick()
-            // } catch (e) {
-            //     console.error(`JobTokenIds tick failed: ${e}!`)
-            //     await this._delay(this.delayIdle)
-            //     continue  // try again the same page!
-            // }
+            try {
+                console.info('JobTokenIds tick start')
+                await this._protectedJobTick()
+            } catch (e) {
+                console.error(`JobTokenIds tick failed: ${e}!`)
+                await this._delay(this.delayIdle)
+                continue  // try again the same page!
+            }
             await this._delay(this.delayIdle)
         }
     }

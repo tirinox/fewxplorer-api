@@ -67,7 +67,7 @@ class OpenSeaJob {
 
                 const tokenInfo = await this._fetchOpenSea(batchIds)
 
-                await this.db.saveNewPrices(tokenInfo, batchIds)
+                await this.db.saveNewPricesToFile(tokenInfo, batchIds)
             } catch (e) {
                 console.error(`job tick failed: ${e}!`)
                 await this._delay(this.delay)

@@ -4,7 +4,7 @@ const KoaRouter = require('koa-router')
 const cors = require('@koa/cors')
 const {nowTS} = require("./util");
 
-function setupRouter(db) {
+function setupRouter(dbPrice, dbTokensIds) {
     const prefix = process.env.API_PREFIX || '/fewpi'
 
     console.log(`API prefix: ${prefix}`)
@@ -19,9 +19,15 @@ function setupRouter(db) {
         })
         .get('/opensea', async (ctx, next) => {
             ctx.body = {
-                db: db.priceDB,
+                db: dbPrice.priceDB,
                 now: nowTS(),
-                lastSuccessAgoSec: db.lastSuccessAgoSec
+                lastSuccessAgoSec: dbPrice.lastSuccessAgoSec
+            }
+        })
+        .get('/tokenids', async (ctx, next) => {
+            ctx.body = {
+                db: dbTokensIds.allData,
+                now: nowTS(),
             }
         })
     return router
@@ -36,7 +42,7 @@ function runServerAPI(dbPrice, dbTokensIds) {
 
     app.use(KoaLogger())
 
-    const router = setupRouter(dbPrice)
+    const router = setupRouter(dbPrice, dbTokensIds)
     app.use(router.routes()).use(router.allowedMethods())
 
     app.use(ctx => {
