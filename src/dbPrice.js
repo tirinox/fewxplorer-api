@@ -3,29 +3,30 @@ const fs = require('fs').promises
 
 
 class DBPrice {
-    constructor(filePath) {
+    constructor(filePath, saveEverySec) {
         this.filePath = filePath
         this.priceDB = {}
-        this.lastSuccessTS = 0
+        this.lastSavedTS = 0
+        this.saveEverySec = saveEverySec
     }
 
     async resetDB() {
         this.priceDB = {}
-        await this.saveNewPrices({})
+        await this.saveNewPricesToFile({})
     }
 
     get lastSuccessSecAgo() {
-        return nowTS() - this.lastSuccessTS
+        return nowTS() - this.lastSavedTS
     }
 
-    async saveNewPrices(newItems, idsRequested) {
+    async saveNewPricesToFile(newItems, idsRequested) {
         try {
             if (!newItems) {
                 return
             }
 
             const now = nowTS()
-            this.lastSuccessTS = now
+
             let nNewKeys = 0
 
             for (let key of Object.keys(newItems)) {
@@ -53,13 +54,16 @@ class DBPrice {
                 }
             }
 
-            await fs.writeFile(this.filePath, JSON.stringify(this.priceDB))
+            if(this.lastSuccessSecAgo > this.saveEverySec) {
+                await fs.writeFile(this.filePath, JSON.stringify(this.priceDB))
+                this.lastSavedTS = now
+            }
         } catch (e) {
             console.error(`saveNewPrices: Error ${e}.`)
         }
     }
 
-    async loadAllTokenPrices() {
+    async loadFromFile() {
         let data
         try {
             const raw = await fs.readFile(this.filePath)

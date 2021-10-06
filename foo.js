@@ -3,17 +3,28 @@ DotEnv.config()
 
 const {DBTokenIds} = require("./src/dbTokenIds");
 const {JobTokenIds} = require("./src/jobTokenIds");
-const {TOKEN_IDS_PATH, FEWMAN_CONTRACT, DELAY, REST_AFTER_WORK, INFURA_ID, ABI_PATH} = require("./config");
+const {Config} = require("./config");
 const {FewmanContract} = require("./src/smartcontract");
+const {timeout} = require("./src/util");
 
 
 async function main() {
-    const dbTokenIds = new DBTokenIds(TOKEN_IDS_PATH)
-    await dbTokenIds.loadAllTokens()
+    const dbTokenIds = new DBTokenIds(Config.TOKEN_IDS_PATH, Config.SAVE_EVERY_SEC)
+    await dbTokenIds.loadFromFile()
 
-    const fewmanContract = new FewmanContract(INFURA_ID, FEWMAN_CONTRACT, ABI_PATH)
-    const jobTokenIds = new JobTokenIds(dbTokenIds, fewmanContract, DELAY, REST_AFTER_WORK)
-    await jobTokenIds._job()
+    const fewmanContract = new FewmanContract(Config.INFURA_ID, Config.FEWMAN_CONTRACT, Config.ABI_PATH)
+    const jobTokenIds = new JobTokenIds(
+        dbTokenIds,
+        fewmanContract,
+        Config.TOKEN_IDS_DELAY_IDLE,
+        Config.TOKEN_IDS_DELAY_TICK
+    )
+    await jobTokenIds.run()
+
+    while (true) {
+        console.log(dbTokenIds.getAll())
+        await timeout(2 * 1000)
+    }
 }
 
 main().then(() => {

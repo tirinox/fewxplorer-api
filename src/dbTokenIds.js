@@ -1,17 +1,18 @@
 const {nowTS, simpleProgression} = require("./util");
 const fs = require('fs').promises
 
-
 class DBTokenIds {
-    constructor(filePath) {
+    constructor(filePath, saveEverySec = 10) {
         this.filePath = filePath
-        this.tokenIds = {}
+        this.tokenIds = {}  // tokenNo -> { tokenId, personality, gender }
         this.lastSuccessTS = 0
+        this.saveEverySec = saveEverySec
+        this.total = 0
     }
 
     async resetDB() {
         this.tokenIds = {}
-        await this.save({})
+        await this.saveToFile()
     }
 
     get lastSuccessSecAgo() {
@@ -19,34 +20,65 @@ class DBTokenIds {
     }
 
     getAll() {
-        return simpleProgression(0, 9999)  // todo!!
-    }
-
-    async save(newItems) {
-        try {
-            if (!newItems) {
-                return
-            }
-
-            this.lastSuccessTS = nowTS()
-
-            await fs.writeFile(this.filePath, JSON.stringify(this.priceDB))
-        } catch (e) {
-            console.error(`save token ids: Error ${e}.`)
+        if (!this.tokenIds) {
+            return simpleProgression(0, 9999)
+        } else {
+            return Object.values(this.tokenIds).map((a) => +a[0])
         }
     }
 
-    async loadAllTokens() {
+    async saveToFile() {
+        try {
+            const now = nowTS()
+
+            const stringData = JSON.stringify({
+                ids: this.tokenIds,
+                lastSuccessTS: now,
+                total: this.total,
+            }, null, 2)
+
+            await fs.writeFile(this.filePath, stringData)
+
+            this.lastSuccessTS = now
+            console.info(`DBTokenIds saved to "${this.filePath}"!`)
+        } catch (e) {
+            console.error(`DBTokenIds save error ${e}.`)
+        }
+    }
+
+    async loadFromFile() {
         let data
         try {
             const raw = await fs.readFile(this.filePath)
             data = JSON.parse(raw)
-            console.info(`DB token ids loaded ${Object.keys(data).length} items`)
+            console.info(`DBTokenIds loaded ${Object.keys(data).length} items`)
         } catch (e) {
             data = {}
-            console.error(`error loading token price file: ${e}`)
+            console.error(`DBTokenIds: Error loading tokenIds DB file: ${e}`)
         }
-        this.priceDB = data
+        if (data) {
+            if (data.ids) {
+                this.tokenIds = data.ids
+            }
+            if (data.lastSuccessTS) {
+                this.lastSuccessTS = +data.lastSuccessTS
+            }
+            if (data.total) {
+                this.total = +data.total
+            }
+        }
+    }
+
+    async saveToken(tokenNo, tokenId, personality) {
+        // this.tokenIds[tokenNo] = {
+        //     id: +tokenNo,
+        //     personality,
+        // }
+        this.tokenIds[tokenNo] = [+tokenId, personality]
+
+        if (this.lastSuccessSecAgo > this.saveEverySec) {
+            await this.saveToFile()
+        }
     }
 }
 

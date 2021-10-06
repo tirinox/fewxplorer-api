@@ -52,23 +52,3 @@ function runServerAPI(dbPrice, dbTokensIds) {
 module.exports = {
     runServerAPI
 }
-
-
-// const {FewmanContract} = require("./smartcontract");
-// const INFURA_ID = process.env.INFURA_ID
-// const FEWMAN_CONTRACT = process.env.CONTRACT || '0xad5f6cdda157694439ef9f6dd409424321c74628'
-// const contract = new FewmanContract(INFURA_ID, FEWMAN_CONTRACT)
-
-
-// .get('/contract/total_supply', async (ctx, next) => {
-//     ctx.body = {
-//         total_supply: (await contract.readTotalSupply())
-//     }
-// })
-// .get('/opensea/tokens/:ids', async (ctx, next) => {
-//     const ids = ctx.params.ids.split(',').map(s => s.trim()).filter(e => e)
-//     const results = await getTokensOpenSea(ids)
-//     ctx.body = {
-//         tokens: results
-//     }
-// })

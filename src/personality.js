@@ -114,8 +114,7 @@ function decodePersonality(tokenId, traitArr) {
     let index = 0
     for (const traitValue of traitValues) {
         const traitDesc = TRAIT_MAP[index]
-        const valueName = traitDesc.values[traitValue]
-        entities[traitDesc.name] = valueName
+        entities[traitDesc.name] = traitDesc.values[traitValue]
         ++index
     }
     entities['Gender'] = genderByTokenId(tokenId)
@@ -125,5 +124,6 @@ function decodePersonality(tokenId, traitArr) {
 module.exports = {
     decodePersonality,
     genderByTokenId,
-    TRAIT_MAP
+    TRAIT_MAP,
+    VALUE_TO_STARS
 }

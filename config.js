@@ -1,23 +1,28 @@
 const path = require('path')
 
-const BATCH_SIZE = 30
-const DELAY = 2.51 // sec
-const REST_AFTER_WORK = 15 * 60 // 15 minute
-const MAX_TOKEN_ID = 9999
-
-const FEWMAN_CONTRACT = process.env.CONTRACT || '0xad5f6cdda157694439ef9f6dd409424321c74628'
-const INFURA_ID = process.env.INFURA_ID
-const ABI_PATH = path.resolve(process.env.ABI_PATH || './data/fewman.abi.json')
-
 const DATA_PATH = process.env.DATA_PATH || './data/var'
 
-const PRICE_PATH = path.resolve(DATA_PATH + '/' + 'prices.json')
-const TOKEN_IDS_PATH = path.resolve(DATA_PATH + '/' + 'token_ids.json')
+const Config = {
+    BATCH_SIZE: 30,
+    DELAY_OPENSEA: 2.51,
+    OPEN_SEA_REST_AFTER_WORK: 15 * 60,
+    MAX_TOKEN_ID: 9999,
+
+    FEWMAN_CONTRACT: process.env.CONTRACT || '0xad5f6cdda157694439ef9f6dd409424321c74628',
+    INFURA_ID: process.env.INFURA_ID,
+    ABI_PATH: path.resolve(process.env.ABI_PATH || './data/fewman.abi.json'),
+
+    DATA_PATH: process.env.DATA_PATH || './data/var',
+
+    PRICE_PATH: path.resolve(DATA_PATH + '/' + 'prices.json'),
+    TOKEN_IDS_PATH: path.resolve(DATA_PATH + '/' + 'token_ids.json'),
+
+    TOKEN_IDS_DELAY_IDLE: 60.0,  // sec
+    TOKEN_IDS_DELAY_TICK: 2.0,  // sec
+
+    SAVE_EVERY_SEC: 2.0,  // Todo: 20 sec
+}
 
 module.exports = {
-    BATCH_SIZE, DELAY,
-    REST_AFTER_WORK, MAX_TOKEN_ID,
-    FEWMAN_CONTRACT, DATA_PATH,
-    PRICE_PATH, TOKEN_IDS_PATH,
-    INFURA_ID, ABI_PATH
+    Config
 }

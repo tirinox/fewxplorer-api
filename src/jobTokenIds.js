@@ -1,27 +1,23 @@
 const {timeout, simpleProgression} = require("./util");
-const {FewmanContract} = require("./smartcontract");
 const {decodePersonality} = require("./personality");
 
 
 class JobTokenIds {
     constructor(db,
                 contract,
-                delay = 1.01,
-                restAfterWork = 60 * 15) {
-        this.delay = delay
-        this.restAfterWork = restAfterWork
+                delayIdle = 60,
+                delayTick = 1.0) {
+        this.delayIdle = delayIdle
+        this.delayTick = delayTick
         this.contract = contract
 
-        this._currentIndex = 0
+        this._currentNo = 0
+        this._isScanning = false
         this._isRunning = false
+        this._lastTotalSupply = 0
 
         this.db = db
         this._contract = contract
-    }
-
-    rewind(p) {
-        this._currentIndex = +p
-        return this
     }
 
     run() {
@@ -42,9 +38,8 @@ class JobTokenIds {
         const n = await this._contract.readTotalSupply()
         console.log(`Fewman total supply: ${n}`)
 
-        for(const i of simpleProgression(0, 50)) {
+        for(const i of simpleProgression(0, 5)) {
             const token = await this._contract.getTokenByIndex(i)
-            // console.log(`Token ${i} => ${token}`)
 
             const personality = await this._contract.getPersonality(token)
             const personalityDecoded = decodePersonality(token, personality)
@@ -53,24 +48,65 @@ class JobTokenIds {
         }
     }
 
+    async _getTokenByIdProtected(id) {
+        try {
+            return await this._contract.getTokenByIndex(id)
+        } catch (e) {
+            return null
+        }
+    }
+
+    async _saveToken(tokenNo, tokenId, personality) {
+        const shortPersonality = personality.join('')
+        await this.db.saveToken(tokenNo, tokenId, shortPersonality)
+        console.info(`Token #${tokenNo} is ID=${tokenId} saved.`)
+    }
+
+    async _doScanTick() {
+        const tokenId = await this._getTokenByIdProtected(this._currentNo)
+        if(tokenId === null) {
+            console.warn(`_doScanTick failed @ no ${this._currentNo}. sleeping...`)
+            return
+        }
+
+        const personality = await this._contract.getPersonality(tokenId)
+        await this._saveToken(this._currentNo, tokenId, personality)
+        this._currentNo++
+        if(this._currentNo >= this._lastTotalSupply) {
+            this._isScanning = false
+        }
+    }
+
+    async _protectedJobTick() {
+        if(!this._isScanning) {
+            const n = +(await this._contract.readTotalSupply())
+            // if number of tokens changed after breading
+            if(n !== this._lastTotalSupply) {
+                this._isScanning = true
+                this._currentNo = 0
+                this._lastTotalSupply = n
+                this.db.total = n
+            }
+        }
+
+        while (this._isScanning) {
+            await this._doScanTick()
+        }
+    }
+
     async _job() {
         this._isRunning = true
-
-        await this._test()  // fixme: debug
-        return  // todo!
-
         while (this._isRunning) {
-            try {
-                console.info('JobTokenIds tick start')
-            } catch (e) {
-                console.error(`JobTokenIds tick failed: ${e}!`)
-                await this._delay(this.delay)
-                continue  // try again the same page!
-            }
-
-            // todo: proceed forward
-
-            await this._delay(this.delay)
+            await this._protectedJobTick()
+            // try {
+            //     console.info('JobTokenIds tick start')
+            //     await this._protectedJobTick()
+            // } catch (e) {
+            //     console.error(`JobTokenIds tick failed: ${e}!`)
+            //     await this._delay(this.delayIdle)
+            //     continue  // try again the same page!
+            // }
+            await this._delay(this.delayIdle)
         }
     }
 
