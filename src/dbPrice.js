@@ -34,7 +34,7 @@ class DBPrice {
                 ++nNewKeys
             }
 
-            console.log(`saveNewPrices: newItems ${nNewKeys}`)
+            console.log(`DBPrice: saveNewPrices = ${nNewKeys}`)
             for (const [k, v] of Object.entries(newItems)) {
                 this.priceDB[k] = v
             }
@@ -50,7 +50,7 @@ class DBPrice {
                     }
                 }
                 if (idsToRemove.length > 0) {
-                    console.info("I removed those ids: ", idsToRemove.join(', '))
+                    console.info("DBPrice: I removed those ids: ", idsToRemove.join(', '))
                 }
             }
 
@@ -59,7 +59,7 @@ class DBPrice {
                 this.lastSavedTS = now
             }
         } catch (e) {
-            console.error(`saveNewPrices: Error ${e}.`)
+            console.error(`DBPrice: saveNewPrices error ${e}.`)
         }
     }
 

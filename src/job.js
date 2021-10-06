@@ -13,6 +13,8 @@ class OpenSeaJob {
         this.restAfterWork = restAfterWork
         this.contract = contract
 
+        this._tokenIdList = []
+
         this._currentIndex = 0
         this._isRunning = false
 
@@ -26,17 +28,18 @@ class OpenSeaJob {
 
     run() {
         if (!this._isRunning) {
+            this._takeTokenIds()
             this._isRunning = true
-            console.info('OpenSeaJob started.')
+            console.info('OpenSeaJob: started.')
             this._job().then(() => {
-                console.warn('job ended!?')
+                console.warn('OpenSeaJob: job ended!?')
             })
         }
     }
 
     stop() {
         this._isRunning = false
-        console.info('OpenSeaJob stopped.')
+        console.info('OpenSeaJob: stopped.')
     }
 
     async _fetchOpenSea(batchIds) {
@@ -54,33 +57,35 @@ class OpenSeaJob {
         return allResults
     }
 
-    _getAllTokenIds() {
-        return this.dbTokenIds.getAll()
-    }
-
     async _job() {
         while (this._isRunning) {
-            console.log(`OpenSeaJob tick. From ${this._currentIndex} ID to ${this._currentIndex + this.batchSize} ID`)
+            console.log(`OpenSeaJob: tick. From ${this._currentIndex} ID to ${this._currentIndex + this.batchSize} ID`)
 
             try {
-                const batchIds = this._getAllTokenIds().slice(this._currentIndex, this._currentIndex + this.batchSize)
+                const batchIds = this._tokenIdList.slice(this._currentIndex, this._currentIndex + this.batchSize)
 
                 const tokenInfo = await this._fetchOpenSea(batchIds)
 
                 await this.db.saveNewPricesToFile(tokenInfo, batchIds)
             } catch (e) {
-                console.error(`job tick failed: ${e}!`)
+                console.error(`OpenSeaJob: job tick failed: ${e}!`)
                 await this._delay(this.delay)
                 continue  // try again the same page!
             }
 
             this._currentIndex += this.batchSize
-            if (this._currentIndex > this.allTokenIds.length) {
+            if (this._currentIndex > this._tokenIdList.length) {
                 this._currentIndex = 0
                 await this._delay(this.restAfterWork)
+                this._takeTokenIds()
             }
             await this._delay(this.delay)
         }
+    }
+
+    _takeTokenIds() {
+        this._tokenIdList = this.dbTokenIds.allTokenIdList
+        console.info(`OpenSeaJob: updated tokenIdList. There are ${this._tokenIdList.length} items.`)
     }
 
     async _delay(delay) {

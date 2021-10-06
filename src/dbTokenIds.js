@@ -19,7 +19,7 @@ class DBTokenIds {
         return nowTS() - this.lastSuccessTS
     }
 
-    getAll() {
+    get allTokenIdList() {
         if (!this.tokenIds) {
             return simpleProgression(0, 9999)
         } else {
@@ -41,10 +41,10 @@ class DBTokenIds {
             this.lastSuccessTS = nowTS()
             const stringData = JSON.stringify(this.allData, null, 2)
             await fs.writeFile(this.filePath, stringData)
-            console.info(`DBTokenIds saved to "${this.filePath}"!`)
+            console.info(`DBTokenIds: saved to "${this.filePath}"!`)
         } catch (e) {
             this.lastSuccessTS = oldTs
-            console.error(`DBTokenIds save error ${e}.`)
+            console.error(`DBTokenIds: save error ${e}.`)
         }
     }
 
@@ -53,7 +53,7 @@ class DBTokenIds {
         try {
             const raw = await fs.readFile(this.filePath)
             data = JSON.parse(raw)
-            console.info(`DBTokenIds loaded ${Object.keys(data).length} items`)
+
         } catch (e) {
             data = {}
             console.error(`DBTokenIds: Error loading tokenIds DB file: ${e}`)
@@ -61,6 +61,7 @@ class DBTokenIds {
         if (data) {
             if (data.ids) {
                 this.tokenIds = data.ids
+                console.info(`DBTokenIds: loaded ${Object.keys(this.tokenIds).length} items`)
             }
             if (data.lastSuccessTS) {
                 this.lastSuccessTS = +data.lastSuccessTS

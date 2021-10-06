@@ -1,5 +1,4 @@
-const {timeout, simpleProgression} = require("./util");
-const {decodePersonality} = require("./personality");
+const {timeout} = require("./util");
 
 
 class JobTokenIds {
@@ -31,21 +30,7 @@ class JobTokenIds {
 
     stop() {
         this._isRunning = false
-        console.info('OpenSeaJob stopped.')
-    }
-
-    async _test() {
-        const n = await this._contract.readTotalSupply()
-        console.log(`Fewman total supply: ${n}`)
-
-        for(const i of simpleProgression(0, 5)) {
-            const token = await this._contract.getTokenByIndex(i)
-
-            const personality = await this._contract.getPersonality(token)
-            const personalityDecoded = decodePersonality(token, personality)
-            const pers = JSON.stringify(personalityDecoded)
-            console.log(`Personality of #${token} is  [ ${pers} ]`)
-        }
+        console.info('JobTokenIds stopped.')
     }
 
     async _getTokenByIdProtected(id) {
@@ -59,29 +44,31 @@ class JobTokenIds {
     async _saveToken(tokenNo, tokenId, personality) {
         const shortPersonality = personality.join('')
         await this.db.saveToken(tokenNo, tokenId, shortPersonality)
-        console.info(`Token #${tokenNo} is ID=${tokenId} saved.`)
+        console.info(`JobTokenIds: Token #${tokenNo} is ID=${tokenId} saved.`)
     }
 
     async _doScanTick() {
         const tokenId = await this._getTokenByIdProtected(this._currentNo)
-        if(tokenId === null) {
-            console.warn(`_doScanTick failed @ no ${this._currentNo}. sleeping...`)
+        if (tokenId === null) {
+            console.warn(`JobTokenIds: _doScanTick failed @ no ${this._currentNo}. sleeping...`)
             return
         }
 
         const personality = await this._contract.getPersonality(tokenId)
         await this._saveToken(this._currentNo, tokenId, personality)
         this._currentNo++
-        if(this._currentNo >= this._lastTotalSupply) {
+        if (this._currentNo >= this._lastTotalSupply) {
             this._isScanning = false
         }
     }
 
     async _protectedJobTick() {
-        if(!this._isScanning) {
+        if (!this._isScanning) {
             const n = +(await this._contract.readTotalSupply())
+            console.log(`Fewman total supply: ${n}`)
             // if number of tokens changed after breading
-            if(n !== this._lastTotalSupply) {
+            if (n !== this._lastTotalSupply) {
+                console.log(`JobTokenIds: start scan. Supply changed from ${this._lastTotalSupply} to ${n}!`)
                 this._isScanning = true
                 this._currentNo = 0
                 this._lastTotalSupply = n
@@ -92,16 +79,17 @@ class JobTokenIds {
         while (this._isScanning) {
             await this._doScanTick()
         }
+        console.log(`JobTokenIds: scan ended.`)
     }
 
     async _job() {
         this._isRunning = true
         while (this._isRunning) {
             try {
-                console.info('JobTokenIds tick start')
+                console.info('JobTokenIds: tick start')
                 await this._protectedJobTick()
             } catch (e) {
-                console.error(`JobTokenIds tick failed: ${e}!`)
+                console.error(`JobTokenIds: tick failed: ${e}!`)
                 await this._delay(this.delayIdle)
                 continue  // try again the same page!
             }

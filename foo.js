@@ -22,7 +22,7 @@ async function main() {
     await jobTokenIds.run()
 
     while (true) {
-        console.log(dbTokenIds.getAll())
+        console.log(dbTokenIds.allTokenIdList)
         await timeout(2 * 1000)
     }
 }
