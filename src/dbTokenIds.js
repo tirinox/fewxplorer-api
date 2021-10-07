@@ -56,7 +56,6 @@ class DBTokenIds {
         try {
             const raw = await fs.readFile(this.filePath)
             data = JSON.parse(raw)
-
         } catch (e) {
             data = {}
             console.error(`DBTokenIds: Error loading tokenIds DB file: ${e}`)

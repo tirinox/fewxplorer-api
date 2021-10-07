@@ -78,14 +78,20 @@ class JobTokenIds {
             }
         }
 
+        let scanned = false
         while (this._isScanning) {
             await this._doScanTick()
+            scanned = true
         }
-        console.log(`JobTokenIds: scan ended.`)
-        await this.db.saveToFile()
+
+        if(scanned) {
+            console.log(`JobTokenIds: scan ended.`)
+            await this.db.saveToFile()
+        }
     }
 
     async _job() {
+        this._lastTotalSupply = this.db.allTokenIdList.length  // if all scanned => no scan at startup
         this._isRunning = true
         while (this._isRunning) {
             try {
