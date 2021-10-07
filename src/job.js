@@ -57,8 +57,21 @@ class OpenSeaJob {
         return allResults
     }
 
+    async _checkTokenIdsSetChanges() {
+        console.log(`this.dbTokenIds.allTokenIdList.length = ${this.dbTokenIds.allTokenIdList.length}`)
+        console.log(`this._tokenIdList.length = ${this._tokenIdList.length}`)
+
+        if(this.dbTokenIds.allTokenIdList.length !== this._tokenIdList.length) {
+            console.log('OpenSeaJob: Heads up! Token list updated. I will restart the scanner!')
+            this._takeTokenIds()
+            this.rewind(0)
+        }
+    }
+
     async _job() {
         while (this._isRunning) {
+            await this._checkTokenIdsSetChanges()
+
             console.log(`OpenSeaJob: tick. From ${this._currentIndex} ID to ${this._currentIndex + this.batchSize} ID`)
 
             try {
@@ -76,9 +89,12 @@ class OpenSeaJob {
             this._currentIndex += this.batchSize
             if (this._currentIndex > this._tokenIdList.length) {
                 this._currentIndex = 0
+                console.info(`OpenSeaJob: finished scanning. Will rest for ${this.restAfterWork} sec...`)
                 await this._delay(this.restAfterWork)
                 this._takeTokenIds()
             }
+
+            // todo: check (this._tokenIdList.len vs this.dbTokenIds.allTokenIdList.len) and reset scan when it changed
             await this._delay(this.delay)
         }
     }

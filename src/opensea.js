@@ -25,7 +25,7 @@ function convertEthToFloat(x) {
 
 function getProxyConfig() {
     const proxy = _.sample(PROXY_LIST)
-    console.info(`proxy ${proxy.ip}`)
+    console.info(`. - Using proxy ${proxy.ip}`)
     return {
         headers: {
             'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ async function getTokensOpenSea(contract, ids, offset, batchSize) {
     for(const id of ids) {
         url += `&token_ids=${id}`
     }
-    console.info(`Offset = ${offset}`)
+    console.info(`OpenSea: getting ${ids.length} ids starting from offset ${offset}`)
     const cfg = getProxyConfig()
 
     const data = await axios.get(url, cfg)

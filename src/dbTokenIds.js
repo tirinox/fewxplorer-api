@@ -5,7 +5,8 @@ class DBTokenIds {
     constructor(filePath, saveEverySec = 10) {
         this.filePath = filePath
         this.tokenIds = {}  // tokenNo -> { tokenId, personality, gender }
-        this.lastSuccessTS = 0
+        this.lastSavedTS = 0
+        this.lastUpdatedTS = 0
         this.saveEverySec = saveEverySec
         this.total = 0
     }
@@ -15,8 +16,12 @@ class DBTokenIds {
         await this.saveToFile()
     }
 
-    get lastSuccessSecAgo() {
-        return nowTS() - this.lastSuccessTS
+    get lastSaveSecAgo() {
+        return nowTS() - this.lastSavedTS
+    }
+
+    get lastUpdateSecAgo() {
+        return nowTS() - this.lastUpdatedTS
     }
 
     get allTokenIdList() {
@@ -30,20 +35,18 @@ class DBTokenIds {
     get allData() {
         return {
             ids: this.tokenIds,
-            lastSuccessTS: this.lastSuccessTS,
+            lastSavedTS: this.lastSavedTS,
+            lastUpdatedTS: this.lastUpdatedTS,
             total: this.total,
         }
     }
 
     async saveToFile() {
         try {
-            const oldTs = this.lastSuccessTS
-            this.lastSuccessTS = nowTS()
             const stringData = JSON.stringify(this.allData, null, 2)
             await fs.writeFile(this.filePath, stringData)
             console.info(`DBTokenIds: saved to "${this.filePath}"!`)
         } catch (e) {
-            this.lastSuccessTS = oldTs
             console.error(`DBTokenIds: save error ${e}.`)
         }
     }
@@ -63,8 +66,11 @@ class DBTokenIds {
                 this.tokenIds = data.ids
                 console.info(`DBTokenIds: loaded ${Object.keys(this.tokenIds).length} items`)
             }
-            if (data.lastSuccessTS) {
-                this.lastSuccessTS = +data.lastSuccessTS
+            if (data.lastSavedTS) {
+                this.lastSavedTS = +data.lastSavedTS
+            }
+            if (data.lastUpdatedTS) {
+                this.lastUpdatedTS = +data.lastUpdatedTS
             }
             if (data.total) {
                 this.total = +data.total
@@ -78,9 +84,28 @@ class DBTokenIds {
         //     personality,
         // }
         this.tokenIds[tokenNo] = [+tokenId, personality]
+        await this._autoSave()
+    }
 
-        if (this.lastSuccessSecAgo > this.saveEverySec) {
+    async _autoSave() {
+        if (this.lastSaveSecAgo > this.saveEverySec) {
+            this.lastSavedTS = nowTS()
             await this.saveToFile()
+        }
+    }
+
+    async updateTotal(newTotal) {
+        if (newTotal) {
+            if(newTotal < this.total) {
+                // truncate the DB
+                const newTokenIds = {}
+                for (const tokenNo of simpleProgression(0, newTotal)) {
+                    newTokenIds[tokenNo] = this.tokenIds[tokenNo]
+                }
+                this.tokenIds = newTokenIds
+            }
+            this.total = newTotal
+            await this._autoSave()
         }
     }
 }

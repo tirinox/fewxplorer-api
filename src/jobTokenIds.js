@@ -64,7 +64,9 @@ class JobTokenIds {
 
     async _protectedJobTick() {
         if (!this._isScanning) {
+            // const n = +(Math.ceil(Math.random() * 100.0)) // fixme: DEBUG
             const n = +(await this._contract.readTotalSupply())
+
             console.log(`Fewman total supply: ${n}`)
             // if number of tokens changed after breading
             if (n !== this._lastTotalSupply) {
@@ -72,7 +74,7 @@ class JobTokenIds {
                 this._isScanning = true
                 this._currentNo = 0
                 this._lastTotalSupply = n
-                this.db.total = n
+                await this.db.updateTotal(n)
             }
         }
 
@@ -80,6 +82,7 @@ class JobTokenIds {
             await this._doScanTick()
         }
         console.log(`JobTokenIds: scan ended.`)
+        await this.db.saveToFile()
     }
 
     async _job() {
@@ -90,9 +93,8 @@ class JobTokenIds {
                 await this._protectedJobTick()
             } catch (e) {
                 console.error(`JobTokenIds: tick failed: ${e}!`)
-                await this._delay(this.delayIdle)
-                continue  // try again the same page!
             }
+            console.info(`JobTokenIds: Sleep for ${this.delayIdle} sec...`)
             await this._delay(this.delayIdle)
         }
     }
