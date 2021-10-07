@@ -7,6 +7,7 @@ SFTP_PORT=21098
 sftp -i ~/.ssh/id_rsa "sftp://${SFTP_USER}@${SFTP_HOST}:${SFTP_PORT}" -b <<-END
   cd /home/fewmzett/fewnodeback
   put index.js
+  put config.js
   put packege.json
   lcd src
   cd src
