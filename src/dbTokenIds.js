@@ -84,6 +84,7 @@ class DBTokenIds {
         //     personality,
         // }
         this.tokenIds[tokenNo] = [+tokenId, personality]
+        this.lastUpdatedTS = nowTS()
         await this._autoSave()
     }
 
