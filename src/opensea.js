@@ -23,19 +23,28 @@ function convertEthToFloat(x) {
     return Math.round(Number(x) / ETH_BIG_DIV * ETH_PREC) / ETH_PREC
 }
 
-function getProxyConfig() {
-    const proxy = _.sample(PROXY_LIST)
-    console.info(`. - Using proxy ${proxy.ip}`)
-    return {
-        headers: {
-            'Content-Type': 'application/json',
-            'User-Agent': proxy.userAgent
-        },
-        httpAgent: proxy.httpsAgent
+function getProxyConfig(key) {
+    if(key) {
+        return {
+            headers: {
+                'Content-Type': 'application/json',
+                'X-API-KEY': key,
+            },
+        }
+    } else {
+        const proxy = _.sample(PROXY_LIST)
+        console.info(`. - Using proxy ${proxy.ip}`)
+        return {
+            headers: {
+                'Content-Type': 'application/json',
+                'User-Agent': proxy.userAgent
+            },
+            httpAgent: proxy.httpsAgent
+        }
     }
 }
 
-async function getTokensOpenSea(contract, ids, offset, batchSize) {
+async function getTokensOpenSea(contract, ids, offset, batchSize, key) {
     offset = offset || 0
     batchSize = batchSize || 30
     let url = `https://api.opensea.io/wyvern/v1/orders?asset_contract_address=${contract}&bundled=false` +
@@ -44,7 +53,7 @@ async function getTokensOpenSea(contract, ids, offset, batchSize) {
         url += `&token_ids=${id}`
     }
     console.info(`OpenSea: getting ${ids.length} ids starting from offset ${offset}`)
-    const cfg = getProxyConfig()
+    const cfg = getProxyConfig(key)
 
     const data = await axios.get(url, cfg)
 

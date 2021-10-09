@@ -6,6 +6,7 @@ const Config = {
     BATCH_SIZE: 30,
     DELAY_OPENSEA: 2.51,
     OPEN_SEA_REST_AFTER_WORK: 15 * 60,
+    OPEN_SEA_KEY: (process.env.OPENSEA_KEY || null),
     // OPEN_SEA_REST_AFTER_WORK: 5,
 
     MAX_TOKEN_ID: 9999,

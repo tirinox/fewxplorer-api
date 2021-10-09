@@ -30,7 +30,8 @@ async function main() {
         Config.FEWMAN_CONTRACT,
         Config.BATCH_SIZE,
         Config.DELAY_OPENSEA,
-        Config.OPEN_SEA_REST_AFTER_WORK
+        Config.OPEN_SEA_REST_AFTER_WORK,
+        Config.OPEN_SEA_KEY
     )
     jobOpenSeaPrices.run()
 

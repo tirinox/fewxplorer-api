@@ -6,12 +6,14 @@ class OpenSeaJob {
     constructor(db, dbTokenIds, contract,
                 batchSize = 50,
                 delay = 1.01,
-                restAfterWork = 60 * 15) {
+                restAfterWork = 60 * 15,
+                openseaKey = null) {
         this.dbTokenIds = dbTokenIds
         this.batchSize = batchSize
         this.delay = delay
         this.restAfterWork = restAfterWork
         this.contract = contract
+        this.openseaKey = openseaKey
 
         this._tokenIdList = []
 
@@ -46,7 +48,9 @@ class OpenSeaJob {
         let offset = 0
         const allResults = {}
         while (1) {
-            const oneBatchResults = await getTokensOpenSea(this.contract, batchIds, offset)
+            const oneBatchResults = await getTokensOpenSea(this.contract, batchIds, offset,
+                null,
+                this.openseaKey)
             Object.assign(allResults, oneBatchResults)
 
             if(Object.keys(oneBatchResults).length < this.batchSize) {
