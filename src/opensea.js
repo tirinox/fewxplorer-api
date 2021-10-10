@@ -64,7 +64,7 @@ async function getTokensOpenSea(contract, ids, offset, batchSize, key) {
         const ass = order.asset
         const tokenId = ass.token_id
         const price = convertEthToFloat(order.current_price)
-        // const owner = ass.owner
+        const owner = ass.owner ? ass.owner.address : ''
 
         const hasTaker = order.taker && order.taker.address !== '0x0000000000000000000000000000000000000000'
         const hasMaker = order.maker && order.maker.address !== '0x0000000000000000000000000000000000000000'
@@ -72,6 +72,7 @@ async function getTokensOpenSea(contract, ids, offset, batchSize, key) {
         results[tokenId.toString()] = {
             tokenId,
             price,
+            owner,
             m: hasMaker ? 1 : 0,
             t: hasTaker ? 1 : 0,
             buyNow: (order.side === 1),
