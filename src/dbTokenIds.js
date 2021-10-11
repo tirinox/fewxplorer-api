@@ -77,12 +77,12 @@ class DBTokenIds {
         }
     }
 
-    async saveToken(tokenNo, tokenId, personality) {
+    async saveToken(tokenNo, tokenId, personality, owner, generation) {
         // this.tokenIds[tokenNo] = {
         //     id: +tokenNo,
         //     personality,
         // }
-        this.tokenIds[tokenNo] = [+tokenId, personality]
+        this.tokenIds[tokenNo] = [+tokenId, personality, owner, +generation]
         this.lastUpdatedTS = nowTS()
         await this._autoSave()
     }

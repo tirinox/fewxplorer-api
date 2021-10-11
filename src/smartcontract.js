@@ -28,6 +28,15 @@ class FewmanContract {
     async getOwnerOf(tokenId) {
         return await this.contract.methods.ownerOf(tokenId).call()
     }
+
+    async getGeneration(tokenId) {
+        if(tokenId < 10000) {
+            return 0
+        } else {
+            // todo: make sure that the method's name is correct
+            return await this.contract.methods.generation(tokenId).call()
+        }
+    }
 }
 
 module.exports = {

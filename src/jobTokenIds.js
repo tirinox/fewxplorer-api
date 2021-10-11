@@ -41,10 +41,10 @@ class JobTokenIds {
         }
     }
 
-    async _saveToken(tokenNo, tokenId, personality) {
+    async _saveToken(tokenNo, tokenId, personality, owner, generation) {
         const shortPersonality = personality.join('')
-        await this.db.saveToken(tokenNo, tokenId, shortPersonality)
-        console.info(`JobTokenIds: Token #${tokenNo} is ID=${tokenId} saved.`)
+        await this.db.saveToken(tokenNo, tokenId, shortPersonality, owner, generation)
+        console.info(`JobTokenIds: Token #${tokenNo} is ID=${tokenId} (G${generation}) saved.`)
     }
 
     async _doScanTick() {
@@ -54,8 +54,13 @@ class JobTokenIds {
             return
         }
 
-        const personality = await this._contract.getPersonality(tokenId)
-        await this._saveToken(this._currentNo, tokenId, personality)
+        const [personality, owner, generation] = await Promise.all([
+            this._contract.getPersonality(tokenId),
+            this._contract.getOwner(tokenId),
+            this._contract.getGeneration(tokenId),
+        ])
+
+        await this._saveToken(this._currentNo, tokenId, personality, owner, generation)
         this._currentNo++
         if (this._currentNo >= this._lastTotalSupply) {
             this._isScanning = false
