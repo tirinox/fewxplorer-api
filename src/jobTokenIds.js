@@ -3,12 +3,11 @@ const {timeout} = require("./util");
 
 class JobTokenIds {
     constructor(db,
-                contract,
+                contract, breedContract,
                 delayIdle = 60,
                 delayTick = 1.0) {
         this.delayIdle = delayIdle
         this.delayTick = delayTick
-        this.contract = contract
 
         this._currentNo = 0
         this._isScanning = false
@@ -17,6 +16,9 @@ class JobTokenIds {
 
         this.db = db
         this._contract = contract
+        this._breedContract = breedContract
+
+        this.alwaysScanDebug = false
     }
 
     run() {
@@ -50,17 +52,20 @@ class JobTokenIds {
     async _doScanTick() {
         const tokenId = await this._getTokenByIdProtected(this._currentNo)
         if (tokenId === null) {
-            console.warn(`JobTokenIds: _doScanTick failed @ no ${this._currentNo}. sleeping...`)
-            return
+            console.error(`JobTokenIds: _doScanTick failed @ no ${this._currentNo}. sleeping...`)
+        } else {
+            try {
+                const [personality, owner, generation] = await Promise.all([
+                    this._contract.getPersonality(tokenId),
+                    this._contract.getOwnerOf(tokenId),
+                    this._breedContract.getGeneration(tokenId),
+                ])
+                await this._saveToken(this._currentNo, tokenId, personality, owner, generation)
+            } catch (e) {
+                console.error(`Get Fewman ${this._currentNo} (#${tokenId}) from contract failed: "${e}"! Moving to the next one...`)
+            }
         }
 
-        const [personality, owner, generation] = await Promise.all([
-            this._contract.getPersonality(tokenId),
-            this._contract.getOwner(tokenId),
-            this._contract.getGeneration(tokenId),
-        ])
-
-        await this._saveToken(this._currentNo, tokenId, personality, owner, generation)
         this._currentNo++
         if (this._currentNo >= this._lastTotalSupply) {
             this._isScanning = false
@@ -69,12 +74,11 @@ class JobTokenIds {
 
     async _protectedJobTick() {
         if (!this._isScanning) {
-            // const n = +(Math.ceil(Math.random() * 100.0)) // fixme: DEBUG
             const n = +(await this._contract.readTotalSupply())
 
             console.log(`Fewman total supply: ${n}`)
             // if number of tokens changed after breading
-            if (n !== this._lastTotalSupply) {
+            if (n !== this._lastTotalSupply || this.alwaysScanDebug) {
                 console.log(`JobTokenIds: start scan. Supply changed from ${this._lastTotalSupply} to ${n}!`)
                 this._isScanning = true
                 this._currentNo = 0

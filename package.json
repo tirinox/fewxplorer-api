@@ -25,6 +25,7 @@
     "@babel/preset-env": "^7.15.6"
   },
   "scripts": {
-    "run": "npx babel-node index"
+    "run": "npx babel-node index",
+    "foo": "npx babel-node foo"
   }
 }

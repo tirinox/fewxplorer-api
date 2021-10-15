@@ -10,7 +10,7 @@ class FewmanContract {
     }
 
     async readTotalSupply() {
-        return await this.contract.methods.totalSupply().call()
+        return +(await this.contract.methods.totalSupply().call())
     }
 
     async getTokenByIndex(i) {
@@ -28,17 +28,26 @@ class FewmanContract {
     async getOwnerOf(tokenId) {
         return await this.contract.methods.ownerOf(tokenId).call()
     }
+}
+
+class FewmanBreedContract {
+    constructor(web3_path, contract, abi_bath) {
+        abi_bath = abi_bath || '../data/breed.abi.json'
+        const abi = require(abi_bath);
+        this.w3 = new Web3(web3_path)
+        this.contract = new this.w3.eth.Contract(abi, contract)
+    }
 
     async getGeneration(tokenId) {
         if(tokenId < 10000) {
             return 0
         } else {
-            // todo: make sure that the method's name is correct
             return await this.contract.methods.generation(tokenId).call()
         }
     }
 }
 
 module.exports = {
-    FewmanContract
+    FewmanContract,
+    FewmanBreedContract
 }

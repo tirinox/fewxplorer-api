@@ -7,7 +7,7 @@ const {DBPrice} = require("./src/dbPrice");
 const {DBTokenIds} = require("./src/dbTokenIds");
 const {JobTokenIds} = require("./src/jobTokenIds");
 const {Config} = require("./config");
-const {FewmanContract} = require("./src/smartcontract");
+const {FewmanContract, FewmanBreedContract} = require("./src/smartcontract");
 
 
 async function main() {
@@ -17,10 +17,14 @@ async function main() {
     const dbTokenIds = new DBTokenIds(Config.TOKEN_IDS_PATH, Config.SAVE_EVERY_SEC)
     await dbTokenIds.loadFromFile()
 
-    const fewmanContract = new FewmanContract(Config.WEB3_URL, Config.FEWMAN_CONTRACT, Config.ABI_PATH)
+    const fewmanContract = new FewmanContract(Config.WEB3_URL, Config.FEWMAN_CONTRACT,
+        Config.ABI_PATH)
+    const fewmanBreedContract = new FewmanBreedContract(Config.WEB3_URL, Config.FEWMAN_BREED_CONTRACT,
+        Config.BREED_ABI_PATH)
     const jobTokenIds = new JobTokenIds(
         dbTokenIds,
         fewmanContract,
+        fewmanBreedContract,
         Config.TOKEN_IDS_DELAY_IDLE,
         Config.TOKEN_IDS_DELAY_TICK
     )
