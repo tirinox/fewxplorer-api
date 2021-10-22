@@ -28,7 +28,10 @@ async function main() {
         Config.TOKEN_IDS_DELAY_IDLE,
         Config.TOKEN_IDS_DELAY_TICK
     )
-    jobTokenIds.run()
+
+    if(Config.RUN_TOKEN_ID_JOB) {
+        jobTokenIds.run()
+    }
 
     const jobOpenSeaPrices = new OpenSeaJob(dbPrice, dbTokenIds,
         Config.FEWMAN_CONTRACT,
@@ -37,7 +40,10 @@ async function main() {
         Config.OPEN_SEA_REST_AFTER_WORK,
         Config.OPEN_SEA_KEY
     )
-    jobOpenSeaPrices.run()
+
+    if(Config.RUN_PRICE_JOB) {
+        jobOpenSeaPrices.run()
+    }
 
     runServerAPI(dbPrice, dbTokenIds)
 }
