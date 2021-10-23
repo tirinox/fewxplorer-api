@@ -34,11 +34,20 @@ function setupRouter(dbPrice, dbTokensIds) {
         })
         .get('/address/:address', async (ctx, next) => {
             const address = ctx.params.address
-            const tokensIds = await getTokensOfAddressAll(address, Config.FEWMAN_CONTRACT, Config.OPEN_SEA_KEY)
-            ctx.body = {
-                tokensIds,
-                count: tokensIds.length,
-                now: nowTS(),
+            try {
+                const tokensIds = await getTokensOfAddressAll(address, Config.FEWMAN_CONTRACT, Config.OPEN_SEA_KEY)
+                ctx.body = {
+                    tokensIds,
+                    count: tokensIds.length,
+                    now: nowTS(),
+                }
+            } catch (e) {
+                ctx.body = {
+                    tokensIds: [],
+                    count: 0,
+                    error: e.toString(),
+                    now: nowTS(),
+                }
             }
         })
     return router
