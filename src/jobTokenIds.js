@@ -1,18 +1,16 @@
 const {timeout} = require("./util");
+const {gen0fewman, initialPersonalityArr} = require("./personality");
 
 
 class JobTokenIds {
     constructor(db,
                 contract, breedContract,
-                delayIdle = 60,
                 delayTick = 1.0) {
-        this.delayIdle = delayIdle
         this.delayTick = delayTick
 
-        this._currentNo = 0
+        this._currentTokenId = 0
         this._isScanning = false
         this._isRunning = false
-        this._lastTotalSupply = 0
 
         this.db = db
         this._contract = contract
@@ -43,65 +41,48 @@ class JobTokenIds {
         }
     }
 
-    async _saveToken(tokenNo, tokenId, personality, owner, generation) {
+    async _saveToken(tokenId, personality, owner, generation, disappeared) {
         const shortPersonality = personality.join('')
-        await this.db.saveToken(tokenNo, tokenId, shortPersonality, owner, generation)
-        console.info(`JobTokenIds: Token #${tokenNo} is ID=${tokenId} (G${generation}) saved.`)
-    }
-
-    async _doScanTick() {
-        const tokenId = await this._getTokenByIdProtected(this._currentNo)
-        if (tokenId === null) {
-            console.error(`JobTokenIds: _doScanTick failed @ no ${this._currentNo}. sleeping...`)
-        } else {
-            try {
-                const [personality, owner, generation] = await Promise.all([
-                    this._contract.getPersonality(tokenId),
-                    this._contract.getOwnerOf(tokenId),
-                    this._breedContract.getGeneration(tokenId),
-                ])
-                await this._saveToken(this._currentNo, tokenId, personality, owner, generation)
-            } catch (e) {
-                console.error(`Get Fewman ${this._currentNo} (#${tokenId}) from contract failed: "${e}"! Moving to the next one...`)
-            }
-        }
-
-        this._currentNo++
-        if (this._currentNo >= this._lastTotalSupply) {
-            this._isScanning = false
-        }
+        await this.db.saveToken(tokenId, shortPersonality, owner, generation, disappeared)
+        console.info(`JobTokenIds: Token #${tokenId} (Gen${generation}) saved. Dead = ${disappeared}. Owner = ${owner} `)
     }
 
     async _protectedJobTick() {
-        if (!this._isScanning) {
-            const n = +(await this._contract.readTotalSupply())
+        const currId = this._currentTokenId
+        try {
+            const childTokenId = await this._breedContract.getChild(currId)
+            if (+childTokenId !== 0) {
+                // This fewman has a child, so it is out
+                if (currId < 10000) {
+                    await this._saveToken(currId, initialPersonalityArr(currId), '', 0, 1)
+                }
+            } else {
+                const [personality, owner, generation] = await Promise.all([
+                    this._contract.getPersonality(currId),
+                    this._contract.getOwnerOf(currId),
+                    this._breedContract.getGeneration(currId),
+                ])
 
-            console.log(`Fewman total supply: ${n}`)
-            // if number of tokens changed after breading
-            if (n !== this._lastTotalSupply || this.alwaysScanDebug) {
-                console.log(`JobTokenIds: start scan. Supply changed from ${this._lastTotalSupply} to ${n}!`)
-                this._isScanning = true
-                this._currentNo = 0
-                this._lastTotalSupply = n
-                await this.db.updateTotal(n)
+                // todo: if no token => stop scan
+
+                await this._saveToken(currId, personality, owner, generation, 0)
             }
+        } catch (e) {
+            console.error(`Get Fewman #${currId} from contract failed: "${e}"! Moving to the next one...`)
         }
 
-        let scanned = false
-        while (this._isScanning) {
-            await this._doScanTick()
-            scanned = true
-        }
-
-        if(scanned) {
-            console.log(`JobTokenIds: scan ended.`)
-            await this.db.saveToFile()
-        }
+        this._currentTokenId++
     }
 
     async _job() {
-        this._lastTotalSupply = this.db.allTokenIdList.length  // if all scanned => no scan at startup
+        this.db.total = +(await this._contract.readTotalSupply())
+        console.info(`JobTokenIds: Total supply: ${this.db.total} fewmans.`)
+
         this._isRunning = true
+        this._currentTokenId = this.db.maximumTokenId
+
+        console.info(`JobTokenIds: Starting job from Token #${this._currentTokenId}`)
+
         while (this._isRunning) {
             try {
                 console.info('JobTokenIds: tick start')
@@ -109,8 +90,8 @@ class JobTokenIds {
             } catch (e) {
                 console.error(`JobTokenIds: tick failed: ${e}!`)
             }
-            console.info(`JobTokenIds: Sleep for ${this.delayIdle} sec...`)
-            await this._delay(this.delayIdle)
+            console.info(`JobTokenIds: Sleep for ${this.delayTick} sec...`)
+            await this._delay(this.delayTick)
         }
     }
 

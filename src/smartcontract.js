@@ -45,6 +45,10 @@ class FewmanBreedContract {
             return await this.contract.methods.generation(tokenId).call()
         }
     }
+
+    async getChild(tokenId) {
+        return await this.contract.methods.childOf(tokenId).call()
+    }
 }
 
 module.exports = {

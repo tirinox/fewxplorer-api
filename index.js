@@ -25,7 +25,6 @@ async function main() {
         dbTokenIds,
         fewmanContract,
         fewmanBreedContract,
-        Config.TOKEN_IDS_DELAY_IDLE,
         Config.TOKEN_IDS_DELAY_TICK
     )
 

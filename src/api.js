@@ -3,6 +3,8 @@ const KoaLogger = require('koa-logger')
 const KoaRouter = require('koa-router')
 const cors = require('@koa/cors')
 const {nowTS} = require("./util");
+const {getTokensOfAddressAll} = require("./opensea");
+const {Config} = require("../config");
 
 function setupRouter(dbPrice, dbTokensIds) {
     const prefix = process.env.API_PREFIX || '/fewpi'
@@ -27,6 +29,15 @@ function setupRouter(dbPrice, dbTokensIds) {
         .get('/tokenids', async (ctx, next) => {
             ctx.body = {
                 db: dbTokensIds.allData,
+                now: nowTS(),
+            }
+        })
+        .get('/address/:address', async (ctx, next) => {
+            const address = ctx.params.address
+            const tokensIds = await getTokensOfAddressAll(address, Config.FEWMAN_CONTRACT, Config.OPEN_SEA_KEY)
+            ctx.body = {
+                tokensIds,
+                count: tokensIds.length,
                 now: nowTS(),
             }
         })

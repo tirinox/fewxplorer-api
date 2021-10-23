@@ -81,8 +81,37 @@ async function getTokensOpenSea(contract, ids, offset, batchSize, key) {
     return results
 }
 
+async function getTokensOfAddress(address, contract, offset, limit, key) {
+    offset = offset || 0
+    limit = limit || 20
+
+    const url = `https://api.opensea.io/api/v1/assets?owner=${address}&asset_contract_address=${contract}&offset=${offset}&limit=${limit}`
+    const cfg = getProxyConfig(key)
+
+    const data = await axios.get(url, cfg)
+
+    return data.data['assets'].map((asset) => +asset.token_id)
+}
+
+async function getTokensOfAddressAll(address, contract, key) {
+    let offset = 0
+    const batch_size = 20
+    const allTokenIds = []
+    while(true) {
+        const batchTokenIds = await getTokensOfAddress(address, contract, offset, batch_size, key)
+        if(!batchTokenIds.length) {
+            break
+        }
+        allTokenIds.push(...batchTokenIds)
+        offset += batch_size
+    }
+    return allTokenIds
+}
+
 module.exports = {
-    getTokensOpenSea
+    getTokensOpenSea,
+    getTokensOfAddressAll,
+    getTokensOfAddress,
 }
 
 // example: getTokensOpenSea([0, 4]).then(console.log)

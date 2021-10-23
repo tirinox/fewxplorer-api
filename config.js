@@ -13,8 +13,8 @@ const Config = {
     OPEN_SEA_KEY: (process.env.OPENSEA_KEY || null),
     // OPEN_SEA_REST_AFTER_WORK: 5,
 
-    RUN_PRICE_JOB: true,
-    RUN_TOKEN_ID_JOB: false,
+    RUN_PRICE_JOB: false,  // fixme: debug
+    RUN_TOKEN_ID_JOB: true,
 
     MAX_TOKEN_ID: 9999,
 
@@ -32,7 +32,6 @@ const Config = {
     PRICE_PATH: path.resolve(DATA_PATH + '/' + 'prices.json'),
     TOKEN_IDS_PATH: path.resolve(DATA_PATH + '/' + 'token_ids.json'),
 
-    TOKEN_IDS_DELAY_IDLE: 60 * 3,  // sec
     TOKEN_IDS_DELAY_TICK: 2.0,  // sec
 
     SAVE_EVERY_SEC: 15.0,

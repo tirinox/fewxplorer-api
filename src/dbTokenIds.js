@@ -4,11 +4,12 @@ const fs = require('fs').promises
 class DBTokenIds {
     constructor(filePath, saveEverySec = 10) {
         this.filePath = filePath
-        this.tokenIds = {}  // tokenNo -> { tokenId, personality, gender }
+        this.tokenIds = {}  // tokenId -> { tokenId, personality, ownerAddress, gender }
         this.lastSavedTS = 0
         this.lastUpdatedTS = 0
         this.saveEverySec = saveEverySec
         this.total = 0
+        this.maximumTokenId = -1
     }
 
     async resetDB() {
@@ -38,6 +39,7 @@ class DBTokenIds {
             lastSavedTS: this.lastSavedTS,
             lastUpdatedTS: this.lastUpdatedTS,
             total: this.total,
+            maximumTokenId: this.maximumTokenId,
         }
     }
 
@@ -65,25 +67,18 @@ class DBTokenIds {
                 this.tokenIds = data.ids
                 console.info(`DBTokenIds: loaded ${Object.keys(this.tokenIds).length} items`)
             }
-            if (data.lastSavedTS) {
-                this.lastSavedTS = +data.lastSavedTS
-            }
-            if (data.lastUpdatedTS) {
-                this.lastUpdatedTS = +data.lastUpdatedTS
-            }
-            if (data.total) {
-                this.total = +data.total
-            }
+            this.lastSavedTS = +(data.lastSavedTS ?? 0)
+            this.lastUpdatedTS = +(data.lastUpdatedTS ?? 0)
+            this.total = +(data.total ?? 0)
+            this.maximumTokenId = +(data.maximumTokenId ?? 0)
         }
     }
 
-    async saveToken(tokenNo, tokenId, personality, owner, generation) {
-        // this.tokenIds[tokenNo] = {
-        //     id: +tokenNo,
-        //     personality,
-        // }
-        this.tokenIds[tokenNo] = [+tokenId, personality, owner, +generation]
+    async saveToken(tokenId, personality, owner, generation, disappeared) {
+        tokenId = +tokenId
+        this.tokenIds[tokenId] = [tokenId, personality, owner, +generation, disappeared]
         this.lastUpdatedTS = nowTS()
+        this.maximumTokenId = Math.max(this.maximumTokenId, tokenId)
         await this._autoSave()
     }
 
@@ -91,21 +86,6 @@ class DBTokenIds {
         if (this.lastSaveSecAgo > this.saveEverySec) {
             this.lastSavedTS = nowTS()
             await this.saveToFile()
-        }
-    }
-
-    async updateTotal(newTotal) {
-        if (newTotal) {
-            if(newTotal < this.total) {
-                // truncate the DB
-                const newTokenIds = {}
-                for (const tokenNo of simpleProgression(0, newTotal)) {
-                    newTokenIds[tokenNo] = this.tokenIds[tokenNo]
-                }
-                this.tokenIds = newTokenIds
-            }
-            this.total = newTotal
-            await this._autoSave()
         }
     }
 }
