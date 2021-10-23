@@ -47,6 +47,18 @@ class JobTokenIds {
         console.info(`JobTokenIds: Token #${tokenId} (Gen${generation}) saved. Dead = ${disappeared}. Owner = ${owner} `)
     }
 
+    async _getOwnerSafe(tokenId) {
+        try {
+            return await this._contract.getOwnerOf(tokenId)
+        } catch (e) {
+            if(e.toString().includes('ERC721: owner query for nonexistent token')) {
+                return 'nonexistent'
+            } else {
+                return undefined
+            }
+        }
+    }
+
     async _protectedJobTick() {
         const currId = this._currentTokenId
         try {
@@ -57,15 +69,22 @@ class JobTokenIds {
                     await this._saveToken(currId, initialPersonalityArr(currId), '', 0, 1)
                 }
             } else {
-                const [personality, owner, generation] = await Promise.all([
-                    this._contract.getPersonality(currId),
-                    this._contract.getOwnerOf(currId),
-                    this._breedContract.getGeneration(currId),
-                ])
+                const owner = await this._getOwnerSafe(currId)
+                if(owner === undefined) {
+                    console.warn(`JobTokenIds: error reading owner of #${currId}. Will try again...`)
+                    return
+                } else if(owner === 'nonexistent') {
+                    return
+                } else {
+                    const [personality, generation] = await Promise.all([
+                        this._contract.getPersonality(currId),
+                        this._breedContract.getGeneration(currId),
+                    ])
 
-                // todo: if no token => stop scan
+                    console.log(currId, personality, owner, generation)
 
-                await this._saveToken(currId, personality, owner, generation, 0)
+                    await this._saveToken(currId, personality, owner, generation, 0)
+                }
             }
         } catch (e) {
             console.error(`Get Fewman #${currId} from contract failed: "${e}"! Moving to the next one...`)
@@ -80,6 +99,8 @@ class JobTokenIds {
 
         this._isRunning = true
         this._currentTokenId = this.db.maximumTokenId
+
+        // this._currentTokenId = 10549 // fixme: debug
 
         console.info(`JobTokenIds: Starting job from Token #${this._currentTokenId}`)
 
