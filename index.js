@@ -27,6 +27,7 @@ async function main() {
         fewmanBreedContract,
         Config.TOKEN_IDS_DELAY_TICK,
         Config.TOKEN_IDS_BIG_SLEEP,
+        Config.TOKEN_IDS_LAST_FEWMANS_SLEEP,
     )
 
     if(Config.RUN_TOKEN_ID_JOB) {

@@ -13,7 +13,7 @@ const Config = {
     OPEN_SEA_KEY: (process.env.OPENSEA_KEY || null),
     // OPEN_SEA_REST_AFTER_WORK: 5,
 
-    RUN_PRICE_JOB: false,  // fixme: debug
+    RUN_PRICE_JOB: true,  
     RUN_TOKEN_ID_JOB: true,
 
     WEB3_URL: INFURA_URL,
@@ -32,6 +32,7 @@ const Config = {
 
     TOKEN_IDS_DELAY_TICK: 0.1,  // sec
     TOKEN_IDS_BIG_SLEEP: 60 * 60 * 4,
+    TOKEN_IDS_LAST_FEWMANS_SLEEP: 5 * 60,
 
     SAVE_EVERY_SEC: 15.0,
 }

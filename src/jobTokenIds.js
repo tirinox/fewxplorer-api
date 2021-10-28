@@ -12,11 +12,12 @@ class JobTokenIds {
     constructor(db,
                 contract, breedContract,
                 delayTick = 1.0,
-                bigSleep = 60 * 60 * 4) {
+                bigSleep = 60 * 60 * 4,
+                lastFewmanDelay = 22) {
         this.delayTick = delayTick
 
         this._currentTokenId = 0
-        this._isScanning = false
+
         this._isRunning = false
 
         this.db = db
@@ -25,8 +26,7 @@ class JobTokenIds {
 
         this._errCounter = 0
         this._bigSleep = bigSleep
-        this._step = 0
-        this._checkLastEveryNSteps = 50
+        this._lastFewmanDelay = lastFewmanDelay
     }
 
     run() {
@@ -90,10 +90,10 @@ class JobTokenIds {
         while (lastId < teorLimitId) {
             const childTokenId = await this._breedContract.getChild(lastId)
             if (+childTokenId !== 0) {
-                console.warn(`JobTokenIds: Oops #${lastId} has a child! Try next!`)
+                console.warn(`JobTokenIds[Last]: Oops #${lastId} has a child! Try next!`)
                 lastId++
             } else {
-                console.info(`JobTokenIds: Jeez #${lastId} has no child!`)
+                console.info(`JobTokenIds[Last]: Jeez #${lastId} has no child!`)
                 break
             }
         }
@@ -102,20 +102,9 @@ class JobTokenIds {
         if (owner && owner !== FEWMAN_DISAPPEARED) {
             const {personality, generation} = await this._getPersonalityAndGenerationSmart(lastId)
             await this._saveToken(lastId, personality, owner, generation, 0)
+            return true
         }
-    }
-
-    async _checkLastFewmansSometimes() {
-        // check the trail fewmans sometimes
-        try {
-            if (this._step % this._checkLastEveryNSteps === 0) {
-                await this._checkLastFewmans()
-            }
-        } catch (e) {
-            console.warn(`JobTokenIds: _checkLastFewmansSometimes failed with error!`)
-        } finally {
-            ++this._step
-        }
+        return false
     }
 
     _isFinished(tokenId, generation) {
@@ -167,6 +156,20 @@ class JobTokenIds {
         this._currentTokenId++
     }
 
+    async _subJobLastFewmans() {
+        while (this._isRunning) {
+            let success = false
+            try {
+                success = await this._checkLastFewmans()
+            } catch (e) {
+                console.warn(`JobTokenIds[Last]: _checkLastFewmansSometimes failed with error!`)
+            }
+            const delay = success ? this._lastFewmanDelay * 0.1 : this._lastFewmanDelay
+            console.warn(`JobTokenIds[Last]: ${success ? "fewman born" : "no new fewman"}, sleep ${delay} sec.`)
+            await this._delay(delay)
+        }
+    }
+
     async _job() {
         // console.log(await this._getPersonalityAndGenerationSmart(10550))
         // return
@@ -178,9 +181,11 @@ class JobTokenIds {
         this._isRunning = true
 
         // on start:
-        this._currentTokenId = 10540
+        this._currentTokenId = 0
 
         console.info(`JobTokenIds: Starting job from Token #${this._currentTokenId}`)
+
+        this._subJobLastFewmans().then(() => {})
 
         while (this._isRunning) {
             try {
