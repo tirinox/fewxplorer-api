@@ -1,11 +1,12 @@
 const {timeout} = require("./util");
-const {initialPersonalityArr} = require("./personality");
+const {initialPersonalityArr, MAX_GEN0_TOKEN_ID} = require("./personality");
 const {FEWMAN_DISAPPEARED} = require("./smartcontract");
 
 /*
        1) Job: every 24 hour (save/load last ts) - start from 0 and scan
        2) Job: get last known token ID and check next - if any
  */
+
 
 class JobTokenIds {
     constructor(db,
@@ -58,7 +59,7 @@ class JobTokenIds {
     async _getPersonalityAndGenerationSmart(tokenId) {
         let personality, generation
         tokenId = +tokenId
-        if (tokenId < 10000) {
+        if (tokenId <= MAX_GEN0_TOKEN_ID) {
             personality = initialPersonalityArr(tokenId)
             generation = 0
         } else {
@@ -75,6 +76,9 @@ class JobTokenIds {
 
     async _saveToken(tokenId, personality, owner, generation, disappeared) {
         const shortPersonality = personality.join('')
+        if(owner === FEWMAN_DISAPPEARED) {
+            owner = ''
+        }
         await this.db.saveToken(tokenId, shortPersonality, owner, generation, disappeared)
         console.info(`JobTokenIds: Token #${tokenId} (Gen${generation}) saved. Dead = ${disappeared}. Owner = ${owner} `)
     }
@@ -82,7 +86,8 @@ class JobTokenIds {
     async _checkLastFewmans(lastId) {
         lastId = lastId !== undefined ? lastId : (this.db.maximumTokenId + 1)
 
-        while (lastId < 20000) {
+        const teorLimitId = (MAX_GEN0_TOKEN_ID + 1) * 2 + 1
+        while (lastId < teorLimitId) {
             const childTokenId = await this._breedContract.getChild(lastId)
             if (+childTokenId !== 0) {
                 console.warn(`JobTokenIds: Oops #${lastId} has a child! Try next!`)
@@ -101,19 +106,23 @@ class JobTokenIds {
     }
 
     async _checkLastFewmansSometimes() {
-        if (this._step % this._checkLastEveryNSteps === 0) {
-            await this._checkLastFewmans()
+        // check the trail fewmans sometimes
+        try {
+            if (this._step % this._checkLastEveryNSteps === 0) {
+                await this._checkLastFewmans()
+            }
+        } catch (e) {
+            console.warn(`JobTokenIds: _checkLastFewmansSometimes failed with error!`)
+        } finally {
+            ++this._step
         }
-        ++this._step
+    }
+
+    _isFinished(tokenId, generation) {
+        return (tokenId > MAX_GEN0_TOKEN_ID && +generation === 0)
     }
 
     async _protectedJobTick() {
-        // check the trail fewmans sometimes
-        try {
-            await this._checkLastFewmansSometimes()
-        } catch (e) {
-            console.warn(`JobTokenIds: _checkLastFewmansSometimes failed with error!`)
-        }
 
         // current big job
         const currId = this._currentTokenId
@@ -133,7 +142,17 @@ class JobTokenIds {
                 if(!this.db.findByTokenId(currId)) {
                     const {personality, generation} = await this._getPersonalityAndGenerationSmart(currId)
                     await this._saveToken(currId, personality, owner, generation, disappeared)
+
+                    if(this._isFinished(currId, generation)) {
+                        console.log(`JobTokenIds: finished at #${currId}.`)
+                        this._currentTokenId = 0
+                        console.log(`JobTokenIds: big sleep ${this._bigSleep} seconds!`)
+                        await this._delay(this._bigSleep)
+                        return
+                    }
+
                 } else {
+                    console.log(`JobTokenIds: #${currId} already saved. Updating owner only`)
                     await this.db.updateOwner(currId, owner)
                 }
 
@@ -149,8 +168,8 @@ class JobTokenIds {
     }
 
     async _job() {
-        console.log(await this._getPersonalityAndGenerationSmart(10550))
-        return
+        // console.log(await this._getPersonalityAndGenerationSmart(10550))
+        // return
         // ---------------
 
         this.db.total = +(await this._contract.readTotalSupply())
@@ -159,9 +178,7 @@ class JobTokenIds {
         this._isRunning = true
 
         // on start:
-        this._currentTokenId = 0
-
-        // this._currentTokenId = 10549 // fixme: debug
+        this._currentTokenId = 10540
 
         console.info(`JobTokenIds: Starting job from Token #${this._currentTokenId}`)
 

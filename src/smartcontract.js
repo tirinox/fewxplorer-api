@@ -1,4 +1,5 @@
 const Web3 = require("web3");
+const {MAX_GEN0_TOKEN_ID} = require("./personality");
 
 const FEWMAN_DISAPPEARED = 'nonexistent'
 
@@ -52,7 +53,7 @@ class FewmanBreedContract {
     }
 
     async getGeneration(tokenId) {
-        if(tokenId < 10000) {
+        if(tokenId <= MAX_GEN0_TOKEN_ID) {
             return 0
         } else {
             return await this.contract.methods.generation(tokenId).call()

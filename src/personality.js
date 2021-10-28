@@ -1,5 +1,7 @@
 const web3 = require("web3");
 
+const MAX_GEN0_TOKEN_ID = 9999
+
 const TRAIT_MAP = {
     0: {
         name: 'Hair',
@@ -164,7 +166,7 @@ function initialPersonalityArr(tokenNumber) {
 
 function gen0fewman(id) {
     id = +id
-    if(id < 0 || id > 9999) {
+    if(id < 0 || id > MAX_GEN0_TOKEN_ID) {
         return null
     }
     return decodePersonality(id, initialPersonalityArr(id), null, 0)
@@ -177,5 +179,6 @@ module.exports = {
     initialPersonalityArr,
     gen0fewman,
     TRAIT_MAP,
-    VALUE_TO_STARS
+    VALUE_TO_STARS,
+    MAX_GEN0_TOKEN_ID
 }

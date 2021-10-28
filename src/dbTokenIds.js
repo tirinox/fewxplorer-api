@@ -1,4 +1,5 @@
 const {nowTS, simpleProgression} = require("./util");
+const {MAX_GEN0_TOKEN_ID} = require("./personality");
 const fs = require('fs').promises
 
 class DBTokenIds {
@@ -27,7 +28,7 @@ class DBTokenIds {
 
     get allTokenIdList() {
         if (!this.tokenIds) {
-            return simpleProgression(0, 9999)
+            return simpleProgression(0, MAX_GEN0_TOKEN_ID)
         } else {
             return Object.values(this.tokenIds).map((a) => +a[0])
         }

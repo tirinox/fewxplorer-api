@@ -16,8 +16,6 @@ const Config = {
     RUN_PRICE_JOB: false,  // fixme: debug
     RUN_TOKEN_ID_JOB: true,
 
-    MAX_TOKEN_ID: 9999,
-
     WEB3_URL: INFURA_URL,
     INFURA_ID: process.env.INFURA_ID,
 
@@ -32,7 +30,8 @@ const Config = {
     PRICE_PATH: path.resolve(DATA_PATH + '/' + 'prices.json'),
     TOKEN_IDS_PATH: path.resolve(DATA_PATH + '/' + 'token_ids.json'),
 
-    TOKEN_IDS_DELAY_TICK: 2.0,  // sec
+    TOKEN_IDS_DELAY_TICK: 0.1,  // sec
+    TOKEN_IDS_BIG_SLEEP: 60 * 60 * 4,
 
     SAVE_EVERY_SEC: 15.0,
 }
