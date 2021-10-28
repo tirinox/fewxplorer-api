@@ -33,6 +33,10 @@ class DBTokenIds {
         }
     }
 
+    findByTokenId(tokenId) {
+        return this.tokenIds[tokenId]
+    }
+
     get allData() {
         return {
             ids: this.tokenIds,
@@ -80,6 +84,15 @@ class DBTokenIds {
         this.lastUpdatedTS = nowTS()
         this.maximumTokenId = Math.max(this.maximumTokenId, tokenId)
         await this._autoSave()
+    }
+
+    async updateOwner(tokenId, owner) {
+        tokenId = +tokenId
+        const fewman = this.tokenIds[tokenId]
+        if(fewman) {
+            fewman.owner = owner
+            await this._autoSave()
+        }
     }
 
     async _autoSave() {

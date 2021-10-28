@@ -1,5 +1,6 @@
 const Web3 = require("web3");
 
+const FEWMAN_DISAPPEARED = 'nonexistent'
 
 class FewmanContract {
     constructor(web3_path, contract, abi_bath) {
@@ -28,6 +29,18 @@ class FewmanContract {
     async getOwnerOf(tokenId) {
         return await this.contract.methods.ownerOf(tokenId).call()
     }
+
+    async getOwnerSafe(tokenId) {
+        try {
+            return await this.getOwnerOf(tokenId)
+        } catch (e) {
+            if(e.toString().includes('ERC721: owner query for nonexistent token')) {
+                return FEWMAN_DISAPPEARED
+            } else {
+                return undefined
+            }
+        }
+    }
 }
 
 class FewmanBreedContract {
@@ -53,5 +66,6 @@ class FewmanBreedContract {
 
 module.exports = {
     FewmanContract,
-    FewmanBreedContract
+    FewmanBreedContract,
+    FEWMAN_DISAPPEARED,
 }

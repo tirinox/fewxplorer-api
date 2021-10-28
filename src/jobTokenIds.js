@@ -1,11 +1,17 @@
 const {timeout} = require("./util");
-const {gen0fewman, initialPersonalityArr} = require("./personality");
+const {initialPersonalityArr} = require("./personality");
+const {FEWMAN_DISAPPEARED} = require("./smartcontract");
 
+/*
+       1) Job: every 24 hour (save/load last ts) - start from 0 and scan
+       2) Job: get last known token ID and check next - if any
+ */
 
 class JobTokenIds {
     constructor(db,
                 contract, breedContract,
-                delayTick = 1.0) {
+                delayTick = 1.0,
+                bigSleep = 60 * 60 * 4) {
         this.delayTick = delayTick
 
         this._currentTokenId = 0
@@ -16,7 +22,10 @@ class JobTokenIds {
         this._contract = contract
         this._breedContract = breedContract
 
-        this.alwaysScanDebug = false
+        this._errCounter = 0
+        this._bigSleep = bigSleep
+        this._step = 0
+        this._checkLastEveryNSteps = 50
     }
 
     run() {
@@ -33,11 +42,34 @@ class JobTokenIds {
         console.info('JobTokenIds stopped.')
     }
 
+    rewindToStart() {
+        this._currentTokenId = 0
+        console.info('JobTokenIds: rewind to 0!')
+    }
+
     async _getTokenByIdProtected(id) {
         try {
             return await this._contract.getTokenByIndex(id)
         } catch (e) {
             return null
+        }
+    }
+
+    async _getPersonalityAndGenerationSmart(tokenId) {
+        let personality, generation
+        tokenId = +tokenId
+        if (tokenId < 10000) {
+            personality = initialPersonalityArr(tokenId)
+            generation = 0
+        } else {
+            [personality, generation] = await Promise.all([
+                this._contract.getPersonality(tokenId),
+                this._breedContract.getGeneration(tokenId),
+            ])
+        }
+
+        return {
+            personality, generation
         }
     }
 
@@ -47,43 +79,66 @@ class JobTokenIds {
         console.info(`JobTokenIds: Token #${tokenId} (Gen${generation}) saved. Dead = ${disappeared}. Owner = ${owner} `)
     }
 
-    async _getOwnerSafe(tokenId) {
-        try {
-            return await this._contract.getOwnerOf(tokenId)
-        } catch (e) {
-            if(e.toString().includes('ERC721: owner query for nonexistent token')) {
-                return 'nonexistent'
+    async _checkLastFewmans(lastId) {
+        lastId = lastId !== undefined ? lastId : (this.db.maximumTokenId + 1)
+
+        while (lastId < 20000) {
+            const childTokenId = await this._breedContract.getChild(lastId)
+            if (+childTokenId !== 0) {
+                console.warn(`JobTokenIds: Oops #${lastId} has a child! Try next!`)
+                lastId++
             } else {
-                return undefined
+                console.info(`JobTokenIds: Jeez #${lastId} has no child!`)
+                break
             }
+        }
+
+        const owner = await this._contract.getOwnerSafe(lastId)
+        if (owner && owner !== FEWMAN_DISAPPEARED) {
+            const {personality, generation} = await this._getPersonalityAndGenerationSmart(lastId)
+            await this._saveToken(lastId, personality, owner, generation, 0)
         }
     }
 
+    async _checkLastFewmansSometimes() {
+        if (this._step % this._checkLastEveryNSteps === 0) {
+            await this._checkLastFewmans()
+        }
+        ++this._step
+    }
+
     async _protectedJobTick() {
+        // check the trail fewmans sometimes
+        try {
+            await this._checkLastFewmansSometimes()
+        } catch (e) {
+            console.warn(`JobTokenIds: _checkLastFewmansSometimes failed with error!`)
+        }
+
+        // current big job
         const currId = this._currentTokenId
         try {
-            const childTokenId = await this._breedContract.getChild(currId)
-            if (+childTokenId !== 0) {
-                // This fewman has a child, so it is out
-                if (currId < 10000) {
-                    await this._saveToken(currId, initialPersonalityArr(currId), '', 0, 1)
+            const owner = await this._contract.getOwnerSafe(currId)
+            if (!owner) {
+                console.warn(`JobTokenIds: error reading owner of #${currId}. Will try again...`)
+                this._errCounter++
+                if (this._errCounter > 5) {
+                    this._errCounter = 0
+                    this._currentTokenId++
+                    console.error(`JobTokenIds: too many error for #${currId}. Move on across him...`)
                 }
+                return
             } else {
-                const owner = await this._getOwnerSafe(currId)
-                if(owner === undefined) {
-                    console.warn(`JobTokenIds: error reading owner of #${currId}. Will try again...`)
-                    return
-                } else if(owner === 'nonexistent') {
-                    return
+                const disappeared = owner === FEWMAN_DISAPPEARED ? 1 : 0
+                if(!this.db.findByTokenId(currId)) {
+                    const {personality, generation} = await this._getPersonalityAndGenerationSmart(currId)
+                    await this._saveToken(currId, personality, owner, generation, disappeared)
                 } else {
-                    const [personality, generation] = await Promise.all([
-                        this._contract.getPersonality(currId),
-                        this._breedContract.getGeneration(currId),
-                    ])
+                    await this.db.updateOwner(currId, owner)
+                }
 
-                    console.log(currId, personality, owner, generation)
-
-                    await this._saveToken(currId, personality, owner, generation, 0)
+                if (disappeared) {
+                    console.warn(`JobTokenIds: Fewman #${currId} disappeared.`)
                 }
             }
         } catch (e) {
@@ -94,11 +149,17 @@ class JobTokenIds {
     }
 
     async _job() {
+        console.log(await this._getPersonalityAndGenerationSmart(10550))
+        return
+        // ---------------
+
         this.db.total = +(await this._contract.readTotalSupply())
         console.info(`JobTokenIds: Total supply: ${this.db.total} fewmans.`)
 
         this._isRunning = true
-        this._currentTokenId = this.db.maximumTokenId
+
+        // on start:
+        this._currentTokenId = 0
 
         // this._currentTokenId = 10549 // fixme: debug
 
