@@ -13,7 +13,7 @@ const Config = {
     OPEN_SEA_KEY: (process.env.OPENSEA_KEY || null),
     // OPEN_SEA_REST_AFTER_WORK: 5,
 
-    RUN_PRICE_JOB: true,  
+    RUN_PRICE_JOB: true,
     RUN_TOKEN_ID_JOB: true,
 
     WEB3_URL: INFURA_URL,
